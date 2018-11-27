@@ -20,7 +20,7 @@ public class MasterMenu extends JPanel {
     private final JButton help;
 
     public MasterMenu() {
-        setPreferredSize(new Dimension(700, 600));  
+        setPreferredSize(new Dimension(700, 650));  
 
         //Credits to Rob Heiser for the Panel Holder code!
         int i = 6;

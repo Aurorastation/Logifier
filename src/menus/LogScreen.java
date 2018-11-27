@@ -4,6 +4,7 @@ package menus;
 import backend.ColorPane;
 import backend.logColorArray;
 import backend.logger;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -28,6 +29,7 @@ public final class LogScreen extends JPanel {
     public void initLogView() {
         setBackground(Color.BLACK);
         setPreferredSize(new Dimension(700, 600));
+        setLayout(new BorderLayout());
         
         JScrollPane scrollPanel = new JScrollPane();
         add(scrollPanel).setPreferredSize(new Dimension(700, 600));
@@ -59,6 +61,13 @@ public final class LogScreen extends JPanel {
     }
     
     public void initSearchedView(String search) {
+        if (search == null) {
+            main.main.ExitToMain();
+            setVisible(false);
+            return;
+        }
+        setLayout(new BorderLayout());
+        
         logger.populateSearch(search);
         setBackground(Color.BLACK);
         setPreferredSize(new Dimension(700, 600));

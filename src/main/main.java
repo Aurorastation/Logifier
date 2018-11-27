@@ -1,6 +1,7 @@
 package main;
 
 import backend.logger;
+import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -22,12 +23,11 @@ public class main {
     private static void Initialize() {
         logger.populateLog();
         base = new JFrame();
-        base.setSize(768, 500);
+        base.setPreferredSize(new Dimension(700, 650));
         base.setTitle("Geeves: The Logifier!");
         base.setVisible(true);
         base.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         base.setLocationRelativeTo(null);  
-        base.setResizable(false);
         menu = new MasterMenu();
         base.add(menu, 0);
         base.pack();
@@ -63,12 +63,11 @@ public class main {
     public static void ExitToMain() {
         base.dispose();
         base = new JFrame();
-        base.setSize(768, 500);
+        base.setPreferredSize(new Dimension(700, 650));
         base.setTitle("Geeves: Re-logified!");
         base.setVisible(true);
         base.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         base.setLocationRelativeTo(null);
-        base.setResizable(false);
         menu = new MasterMenu();
         base.add(menu, 0);
         base.pack();
