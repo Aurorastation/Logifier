@@ -30,6 +30,8 @@ public class HelpScreen extends JPanel {
         JTextArea helpTxt = new JTextArea(" Heya, this logifier has been made by Geeves."
                 + "\n Controls:"
                 + "\n Escape - Exit to Main Menu (Will Exit program if pressed on main menu)"
+                + "\n Space - Sets the text you want to go to next. (Must be viewing logs, full or searched)"
+                + "\n F - Go to the next instance of the text you entered during the Space operation."
                 + "\n Menus:"
                 + "\n View Full Logs - This displays a colour-coded version of the logfile you have put into the folder."
                 + "\n Search - This searches the logs for case insensitive occurances of the text you have entered."
