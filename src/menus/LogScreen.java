@@ -141,24 +141,20 @@ public final class LogScreen extends JPanel {
     Action searcher = new AbstractAction() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            // Focus the text area, otherwise the highlighting won't show up
             logScreen.requestFocusInWindow();
-            // Make sure we have a valid search term
             if (find != null && find.length() > 0) {
                 Document document = logScreen.getDocument();
                 int findLength = find.length();
                 try {
                     boolean found = false;
-                    // Rest the search position if we're at the end of the document
                     if (pos + findLength > document.getLength()) {
                         pos = 0;
                     }
-                    // While we haven't reached the end...
-                    // "<=" Correction
+
                     while (pos + findLength <= document.getLength()) {
-                        // Extract the text from teh docuemnt
+
                         String match = document.getText(pos, findLength).toLowerCase();
-                        // Check to see if it matches or request
+
                         if (match.equals(find)) {
                             found = true;
                             break;
@@ -166,16 +162,16 @@ public final class LogScreen extends JPanel {
                         pos++;
                     }
 
-                    // Did we find something...
+
                     if (found) {
-                        // Get the rectangle of the where the text would be visible...
+
                         Rectangle viewRect = logScreen.modelToView(pos);
-                        // Scroll to make the rectangle visible
+
                         logScreen.scrollRectToVisible(viewRect);
-                        // Highlight the text
+ 
                         logScreen.setCaretPosition(pos + findLength);
                         logScreen.moveCaretPosition(pos);
-                        // Move the search position beyond the current match
+
                         pos += findLength;
                     }
 
