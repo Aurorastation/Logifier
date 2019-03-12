@@ -28,6 +28,10 @@ public final class LogScreen extends JPanel {
     public LogScreen(String search) {
         initSearchedView(search);
     }
+	
+	public LogScreen(String search, String search2) {
+        initMultiSearchedView(search, search2);
+    }
 
     ColorPane logScreen = new ColorPane();
     String find = "";
@@ -84,6 +88,53 @@ public final class LogScreen extends JPanel {
         setLayout(new BorderLayout());
 
         logger.populateSearch(search);
+        setBackground(Color.BLACK);
+        setPreferredSize(new Dimension(700, 600));
+
+        JScrollPane scrollPanel = new JScrollPane();
+        add(scrollPanel).setPreferredSize(new Dimension(700, 600));
+        scrollPanel.setFocusable(false);
+
+        for (int i = 0; i < logger.getSearchedSize(); i++) {
+            if (logColorArray.getSType(i).equalsIgnoreCase("BASIC")) {
+                logScreen.append(Color.black, logger.getSearchedString(i));
+            } else if (logColorArray.getSType(i).equalsIgnoreCase("ADMIN")) {
+                logScreen.append(Color.red, logger.getSearchedString(i));
+            } else if (logColorArray.getSType(i).equalsIgnoreCase("OOC")) {
+                logScreen.append(Color.blue, logger.getSearchedString(i));
+            } else if (logColorArray.getSType(i).equalsIgnoreCase("ATTACK")) {
+                logScreen.append(Color.MAGENTA, logger.getSearchedString(i));
+            } else if (logColorArray.getSType(i).equalsIgnoreCase("IGNORE")) {
+                logScreen.append(Color.gray, logger.getSearchedString(i));
+            }
+        }
+        logScreen.setEditable(false);
+        scrollPanel.setViewportView(logScreen);
+
+        setVisible(true);
+
+        getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ESCAPE"),
+                "escapePressed");
+        getActionMap().put("escapePressed", exit);
+
+        getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("SPACE") ,
+                "spacePressed");
+        getActionMap().put("spacePressed", setSearch);
+        
+        getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("F") ,
+                "fPressed");
+        getActionMap().put("fPressed", searcher);
+    }
+	
+	public void initMultiSearchedView(String search, String search2) {
+        if (search == null) {
+            main.main.ExitToMain();
+            setVisible(false);
+            return;
+        }
+        setLayout(new BorderLayout());
+
+        logger.populateMultiSearch(search, search2);
         setBackground(Color.BLACK);
         setPreferredSize(new Dimension(700, 600));
 

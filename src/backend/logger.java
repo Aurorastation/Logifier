@@ -137,6 +137,72 @@ public class logger {
         }
 
     }
+	
+	public static void populateMultiSearch(String search, String search2){
+        Scanner fileScan;
+        try {
+            String temp = "";
+            fileScan = new Scanner(new File("logifier.txt"));
+
+            while (fileScan.hasNextLine()) {
+                temp = fileScan.nextLine();
+                if (temp.toLowerCase().contains(search.toLowerCase()) || temp.toLowerCase().contains(search2.toLowerCase())) {
+                    searchedSize++;
+                }
+            }
+            fileScan.close();
+
+            searchArr = new String[searchedSize];
+            logColorArray.initSearchArr(searchedSize);
+
+            fileScan = new Scanner(new File("logifier.txt"));
+            String temp2 = "";
+            int searchPos = 0;
+
+            for (int i = 0; i < fileSize; i++) {
+                temp2 = fileScan.nextLine() + "\n";
+
+                if (temp2.toLowerCase().contains(search.toLowerCase()) || temp2.toLowerCase().contains(search2.toLowerCase())) {
+                    searchArr[searchPos] = temp2;                    
+                    if (searchArr[searchPos].contains("ADMIN")) {
+                        logColorArray.setSType(searchPos, "ADMIN");
+                    } else if (searchArr[searchPos].contains("OOC")) {
+                        logColorArray.setSType(searchPos, "OOC");
+                    } else if (searchArr[searchPos].contains("ATTACK")) {
+                        logColorArray.setSType(searchPos, "ATTACK");
+                    } else if (searchArr[searchPos].contains("ACCESS")) {
+                        logColorArray.setSType(searchPos, "IGNORE");
+                    } else if (searchArr[searchPos].contains("DEBUG")) {
+                        logColorArray.setSType(searchPos, "IGNORE");
+                    } else if (searchArr[searchPos].contains("SS")) {
+                        logColorArray.setSType(searchPos, "IGNORE");
+                    } else if (searchArr[searchPos].contains("GC")) {
+                        logColorArray.setSType(searchPos, "IGNORE");
+                    } else if (searchArr[searchPos].contains("mouse")) {
+                        logColorArray.setSType(searchPos, "IGNORE");
+                    } else if (searchArr[searchPos].contains("TGS")) {
+                        logColorArray.setSType(searchPos, "IGNORE");
+                    } else if (searchArr[searchPos].contains("TOPIC")) {
+                        logColorArray.setSType(searchPos, "IGNORE");
+                    } else if (searchArr[searchPos].contains("MASTER")) {
+                        logColorArray.setSType(searchPos, "IGNORE");
+                    } else if (searchArr[searchPos].contains("VOTE")) { 
+                        logColorArray.setSType(searchPos, "IGNORE");
+                    } else if (searchArr[searchPos].contains("GAME")) {
+                        logColorArray.setSType(searchPos, "IGNORE");
+                    } else {
+                        logColorArray.setSType(searchPos, "BASIC");
+                    }
+                    searchPos++;
+                }
+
+            }
+
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "logifier.txt not found! Make sure you named it correctly! Logs will be bugged!");
+        }
+
+    }
 
     public static String logString() {
         StringBuilder finalString = new StringBuilder("");

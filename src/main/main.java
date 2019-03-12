@@ -44,10 +44,31 @@ public class main {
     //Called by MasterMenu to add the OptionScreen onto the JFrame
     public static void viewSearchedLogs() {
         menu.setVisible(false);
-        String message = JOptionPane.showInputDialog(null, "Please insert the word, ckey or phrase you are looking for.");
-        JPanel log = new LogScreen(message);
-        base.add(log);
-        base.pack();
+		if (JOptionPane.showConfirmDialog(null, "Yes: Search for two phrases. No: Search for one phrase.", "Search Amount Selection",
+        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+			String message = JOptionPane.showInputDialog(null, "Please insert the first word, ckey or phrase you are looking for.");
+			String message2 = JOptionPane.showInputDialog(null, "Please insert the second word, ckey or phrase you are looking for.");
+			if (message == null) {
+				message = "";
+				JOptionPane.showMessageDialog(null, "No input for first search, displaying full logs. Please wait.");
+			}
+			if (message2 == null) {
+				message2 = "";
+				JOptionPane.showMessageDialog(null, "No input for second search, displaying full logs. Please wait.");
+			}
+			JPanel log = new LogScreen(message, message2);
+			base.add(log);
+			base.pack();
+		} else {
+			String message = JOptionPane.showInputDialog(null, "Please insert the word, ckey or phrase you are looking for.");
+			if (message == null){
+				message = "";
+				JOptionPane.showMessageDialog(null, "No input for search, displaying full logs. Please wait.");
+			}
+			JPanel log = new LogScreen(message);
+			base.add(log);
+			base.pack();
+		}
     }
 
     ////Called by MasterMenu to add the HelpScreen onto the JFrame
