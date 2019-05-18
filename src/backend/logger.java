@@ -20,7 +20,6 @@ public class logger {
 			File[] filesList = curDir.listFiles();
 			for(File f : filesList) {
 				if(f.isFile()) {
-					System.out.println(f.getName());
 					if(f.getName().equals("logifier.log")) fileName = "logifier.log";
 					if(f.getName().equals("logifier.txt")) fileName = "logifier.txt";
 				}
