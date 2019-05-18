@@ -11,16 +11,22 @@ public class logger {
     private static int searchedSize = 0;
     private static String[] logArr;
     private static String[] searchArr;
-
-    public logger() {
-
-    }
+	private static String fileName;
 
     public static void populateLog() {
         Scanner fileScan;
         try {
+			File curDir = new File(".");
+			File[] filesList = curDir.listFiles();
+			for(File f : filesList) {
+				if(f.isFile()) {
+					System.out.println(f.getName());
+					if(f.getName().equals("logifier.log")) fileName = "logifier.log";
+					if(f.getName().equals("logifier.txt")) fileName = "logifier.txt";
+				}
+			}
 
-            fileScan = new Scanner(new File("logifier.txt"));
+            fileScan = new Scanner(new File(fileName));
 
             while (fileScan.hasNextLine()) {
                 fileSize++;
@@ -30,7 +36,7 @@ public class logger {
 
             logArr = new String[fileSize];
 
-            fileScan = new Scanner(new File("logifier.txt"));
+            fileScan = new Scanner(new File(fileName));
 
             for (int i = 0; i < fileSize; i++) {
                 logArr[i] = fileScan.nextLine() + "\n";
@@ -67,7 +73,7 @@ public class logger {
             }
 
         } catch (FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(null, "logifier.txt not found! Make sure you named it correctly! Logs will be bugged!");
+            JOptionPane.showMessageDialog(null, "The logifier text file not found! Make sure you named it correctly! Logs will be bugged!");
         }
 
     }
@@ -76,8 +82,10 @@ public class logger {
         Scanner fileScan;
         try {
             String temp = "";
-            fileScan = new Scanner(new File("logifier.txt"));
+            fileScan = new Scanner(new File(fileName));
 
+			searchedSize = 0;
+			
             while (fileScan.hasNextLine()) {
                 temp = fileScan.nextLine();
                 if (temp.toLowerCase().contains(search.toLowerCase())) {
@@ -89,7 +97,7 @@ public class logger {
             searchArr = new String[searchedSize];
             logColorArray.initSearchArr(searchedSize);
 
-            fileScan = new Scanner(new File("logifier.txt"));
+            fileScan = new Scanner(new File(fileName));
             String temp2 = "";
             int searchPos = 0;
 
@@ -133,7 +141,7 @@ public class logger {
             }
 
         } catch (FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(null, "logifier.txt not found! Make sure you named it correctly! Logs will be bugged!");
+            JOptionPane.showMessageDialog(null, "The logifier text file not found! Make sure you named it correctly! Logs will be bugged!");
         }
 
     }
@@ -142,7 +150,9 @@ public class logger {
         Scanner fileScan;
         try {
             String temp = "";
-            fileScan = new Scanner(new File("logifier.txt"));
+            fileScan = new Scanner(new File(fileName));
+			
+			searchedSize = 0;
 
             while (fileScan.hasNextLine()) {
                 temp = fileScan.nextLine();
@@ -155,7 +165,7 @@ public class logger {
             searchArr = new String[searchedSize];
             logColorArray.initSearchArr(searchedSize);
 
-            fileScan = new Scanner(new File("logifier.txt"));
+            fileScan = new Scanner(new File(fileName));
             String temp2 = "";
             int searchPos = 0;
 
@@ -199,7 +209,7 @@ public class logger {
             }
 
         } catch (FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(null, "logifier.txt not found! Make sure you named it correctly! Logs will be bugged!");
+            JOptionPane.showMessageDialog(null, "The logifier text file not found! Make sure you named it correctly! Logs will be bugged!");
         }
 
     }

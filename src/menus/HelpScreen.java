@@ -36,7 +36,7 @@ public class HelpScreen extends JPanel {
                 + "\n View Full Logs - This displays a colour-coded version of the logfile you have put into the folder."
                 + "\n Search - This searches the logs for case insensitive occurances of the text you have entered."
                 + "\n How to use:"
-                + "\n Take your log file, called something like 'bBxty-xFvt.txt' and renamed it to 'logifier.txt', then place it in the same folder as 'logifier.jar'"
+                + "\n Take your log file, called something like 'bBxty-xFvt' and rename it to 'logifier', then place it in the same folder as 'logifier.jar'"
                 + "\n Additional info:"
                 + "\n If anything horrible happens, contact me at Geeves#4318");
         helpTxt.setFocusable(false);
