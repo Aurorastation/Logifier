@@ -12,6 +12,7 @@ public class logger {
     private static String[] logArr;
     private static String[] searchArr;
 	private static String fileName = "if you're reading this, you're a nerd!";
+	private static String logID = "Error: ID Fucked!";
 
     public static void populateLog() {
         Scanner fileScan;
@@ -39,7 +40,6 @@ public class logger {
 
             for (int i = 0; i < fileSize; i++) {
                 logArr[i] = fileScan.nextLine() + "\n";
-
                 if (logArr[i].contains("ADMIN")) {
                     logColorArray.setType(i, "ADMIN");
                 } else if (logArr[i].contains("OOC")) {
@@ -70,7 +70,10 @@ public class logger {
                     logColorArray.setType(i, "BASIC");
                 }
             }
-
+			Integer IDIndex = logArr[0].indexOf("ID:");
+			IDIndex = IDIndex + 4;
+			logID = logArr[0].substring(IDIndex, IDIndex + 8);
+		
         } catch (FileNotFoundException ex) {
             JOptionPane.showMessageDialog(null, "The logifier text file not found! Make sure you named it correctly! Logs will be bugged!");
         }
@@ -218,7 +221,6 @@ public class logger {
         for (int i = 0; i < logArr.length; i++) {
             finalString.append(logArr[i]).append("\n");
         }
-
         return finalString.toString();
     }
 
@@ -231,10 +233,22 @@ public class logger {
     }
 
     public static String getLogString(int arrNum) {
-        return logArr[arrNum];
+		String adjustedLogArr[] = new String[fileSize];
+		adjustedLogArr[arrNum] = logArr[arrNum];
+		adjustedLogArr[arrNum] = adjustedLogArr[arrNum].replaceAll("&#34;", "''");
+		adjustedLogArr[arrNum] = adjustedLogArr[arrNum].replaceAll("&#39;", "'");
+		if (arrNum != 0) adjustedLogArr[arrNum] = adjustedLogArr[arrNum].replaceAll(logID + " ", "");
+        return adjustedLogArr[arrNum];
     }
 
     public static String getSearchedString(int arrNum) {
-        return searchArr[arrNum];
+		String adjustedLogArr[] = new String[searchedSize];
+		adjustedLogArr[arrNum] = searchArr[arrNum];
+		System.out.println(adjustedLogArr[arrNum]);
+		adjustedLogArr[arrNum] = adjustedLogArr[arrNum].replaceAll("&#34;", "''");
+		adjustedLogArr[arrNum] = adjustedLogArr[arrNum].replaceAll("&#39;", "'");
+		System.out.println(adjustedLogArr[arrNum]);
+		if (arrNum != 0) adjustedLogArr[arrNum] = adjustedLogArr[arrNum].replaceAll(logID + " ", "");
+        return adjustedLogArr[arrNum];
     }
 }
