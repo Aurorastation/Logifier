@@ -11,8 +11,8 @@ public class logger {
 	private static int searchedSize = 0;
 	private static String[] logArr;
 	private static String[] searchArr;
-	private static String fileName = "if you're reading this, you're a nerd!";
-	private static String logID = "Error: ID Fucked!";
+	private static String fileName;
+	private static String logID;
 
 	public static void populateLog() {
 		Scanner fileScan;
@@ -70,10 +70,10 @@ public class logger {
 					logColorArray.setType(i, "BASIC");
 				}
 			}
-			Integer IDIndex = logArr[0].indexOf("ID:");
+			Integer IDIndex = logArr[2].indexOf("ID: ");
 			IDIndex = IDIndex + 4;
-			logID = logArr[0].substring(IDIndex, IDIndex + 8);
-
+			Integer bracketIndex = logArr[2].indexOf(")");
+			logID = logArr[2].substring(IDIndex, bracketIndex);
 		} catch (FileNotFoundException ex) {
 			JOptionPane.showMessageDialog(null, "The logifier text file not found! Make sure you named it correctly! Logs will be bugged!");
 		}
@@ -107,7 +107,7 @@ public class logger {
 				temp2 = fileScan.nextLine() + "\n";
 
 				if (temp2.toLowerCase().contains(search.toLowerCase())) {
-					searchArr[searchPos] = temp2;                    
+					searchArr[searchPos] = temp2;
 					if (searchArr[searchPos].contains("ADMIN")) {
 						logColorArray.setSType(searchPos, "ADMIN");
 					} else if (searchArr[searchPos].contains("OOC")) {
@@ -130,7 +130,7 @@ public class logger {
 						logColorArray.setSType(searchPos, "IGNORE");
 					} else if (searchArr[searchPos].contains("MASTER")) {
 						logColorArray.setSType(searchPos, "IGNORE");
-					} else if (searchArr[searchPos].contains("VOTE")) { 
+					} else if (searchArr[searchPos].contains("VOTE")) {
 						logColorArray.setSType(searchPos, "IGNORE");
 					} else if (searchArr[searchPos].contains("GAME")) {
 						logColorArray.setSType(searchPos, "IGNORE");
@@ -175,7 +175,7 @@ public class logger {
 				temp2 = fileScan.nextLine() + "\n";
 
 				if (temp2.toLowerCase().contains(search.toLowerCase()) || temp2.toLowerCase().contains(search2.toLowerCase())) {
-					searchArr[searchPos] = temp2;                    
+					searchArr[searchPos] = temp2;
 					if (searchArr[searchPos].contains("ADMIN")) {
 						logColorArray.setSType(searchPos, "ADMIN");
 					} else if (searchArr[searchPos].contains("OOC")) {
@@ -198,7 +198,7 @@ public class logger {
 						logColorArray.setSType(searchPos, "IGNORE");
 					} else if (searchArr[searchPos].contains("MASTER")) {
 						logColorArray.setSType(searchPos, "IGNORE");
-					} else if (searchArr[searchPos].contains("VOTE")) { 
+					} else if (searchArr[searchPos].contains("VOTE")) {
 						logColorArray.setSType(searchPos, "IGNORE");
 					} else if (searchArr[searchPos].contains("GAME")) {
 						logColorArray.setSType(searchPos, "IGNORE");
@@ -237,18 +237,16 @@ public class logger {
 		adjustedLogArr[arrNum] = logArr[arrNum];
 		adjustedLogArr[arrNum] = adjustedLogArr[arrNum].replaceAll("&#34;", "''");
 		adjustedLogArr[arrNum] = adjustedLogArr[arrNum].replaceAll("&#39;", "'");
-		if (arrNum != 0) adjustedLogArr[arrNum] = adjustedLogArr[arrNum].replaceAll(logID + " ", "");
+		if (arrNum != 2) adjustedLogArr[arrNum] = adjustedLogArr[arrNum].replaceAll(logID + " ", "");
 		return adjustedLogArr[arrNum];
 	}
 
 	public static String getSearchedString(int arrNum) {
 		String adjustedLogArr[] = new String[searchedSize];
 		adjustedLogArr[arrNum] = searchArr[arrNum];
-		System.out.println(adjustedLogArr[arrNum]);
 		adjustedLogArr[arrNum] = adjustedLogArr[arrNum].replaceAll("&#34;", "''");
 		adjustedLogArr[arrNum] = adjustedLogArr[arrNum].replaceAll("&#39;", "'");
-		System.out.println(adjustedLogArr[arrNum]);
-		if (arrNum != 0) adjustedLogArr[arrNum] = adjustedLogArr[arrNum].replaceAll(logID + " ", "");
+		if (arrNum != 2) adjustedLogArr[arrNum] = adjustedLogArr[arrNum].replaceAll(logID + " ", "");
 		return adjustedLogArr[arrNum];
 	}
 }

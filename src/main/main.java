@@ -24,7 +24,7 @@ public class main {
 		logger.populateLog();
 		base = new JFrame();
 		base.setPreferredSize(new Dimension(700, 650));
-		base.setTitle("Geeves: The Logifier!");
+		base.setTitle("Geeves: Logifier at Night!");
 		base.setVisible(true);
 		base.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		base.setLocationRelativeTo(null);  
@@ -43,32 +43,30 @@ public class main {
 
 	//Called by MasterMenu to add the OptionScreen onto the JFrame
 	public static void viewSearchedLogs() {
-		menu.setVisible(false);
-		if (JOptionPane.showConfirmDialog(null, "Yes: Search for two phrases. No: Search for one phrase.", "Search Amount Selection",
-		JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-			String message = JOptionPane.showInputDialog(null, "Please insert the first word, ckey or phrase you are looking for.");
-			String message2 = JOptionPane.showInputDialog(null, "Please insert the second word, ckey or phrase you are looking for.");
-			if (message == null) {
-				message = "";
-				JOptionPane.showMessageDialog(null, "No input for first search, displaying full logs. Please wait.");
-			}
-			if (message2 == null) {
-				message2 = "";
-				JOptionPane.showMessageDialog(null, "No input for second search, displaying full logs. Please wait.");
-			}
-			JPanel log = new LogScreen(message, message2);
-			base.add(log);
-			base.pack();
-		} else {
-			String message = JOptionPane.showInputDialog(null, "Please insert the word, ckey or phrase you are looking for.");
-			if (message == null){
-				message = "";
-				JOptionPane.showMessageDialog(null, "No input for search, displaying full logs. Please wait.");
-			}
-			JPanel log = new LogScreen(message);
-			base.add(log);
-			base.pack();
+		JPanel log;
+		String message = JOptionPane.showInputDialog(null, "Please insert the first word, ckey or phrase you are looking for. Leave blank to get full logs. Press cancel to cancel search entirely.");
+		if(message == "") {
+			log = new LogScreen();
+		} 
+		else if(message == null) {
+			return;
 		}
+		else
+		{
+			String message2 = JOptionPane.showInputDialog(null, "Please insert the second word, ckey or phrase you are looking for. Leave blank if you don't want to search for a second word. Press cancel to cancel search entirely.");
+			if(message2 == "") {
+				log = new LogScreen(message);
+			}
+			else if(message2 == null) 
+			{
+				return;
+			}
+			else {
+				log = new LogScreen(message, message2);
+			}
+		}
+		base.add(log);
+		base.pack();
 	}
 
 	////Called by MasterMenu to add the HelpScreen onto the JFrame
@@ -85,7 +83,7 @@ public class main {
 		base.dispose();
 		base = new JFrame();
 		base.setPreferredSize(new Dimension(700, 650));
-		base.setTitle("Geeves: Re-logified!");
+		base.setTitle("Geeves: Logifier at Night!");
 		base.setVisible(true);
 		base.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		base.setLocationRelativeTo(null);

@@ -31,13 +31,15 @@ public class MasterMenu extends JPanel {
 		for (int m = 0; m < i; m++) {
 			for (int n = 0; n < j; n++) {
 				panelHolder[m][n] = new JPanel();
-				panelHolder[m][n].setBackground(Color.ORANGE);
+				panelHolder[m][n].setBackground(Color.decode("#223620"));
 				add(panelHolder[m][n]);
 			}
 		}
 
 		start = new JButton("View Full Logs");
 		start.setPreferredSize(new Dimension(200, 95));
+		start.setBackground(Color.decode("#1F2E1D"));
+		start.setForeground(Color.decode("#A8D1A5"));
 		start.addActionListener(new ActionListener() {
 
 			@Override
@@ -50,6 +52,8 @@ public class MasterMenu extends JPanel {
 
 		options = new JButton("Search");
 		options.setPreferredSize(new Dimension(200, 95));
+		options.setBackground(Color.decode("#1F2E1D"));
+		options.setForeground(Color.decode("#A8D1A5"));
 		options.addActionListener(new ActionListener() {
 
 			@Override
@@ -62,6 +66,8 @@ public class MasterMenu extends JPanel {
 
 		help = new JButton("Help");
 		help.setPreferredSize(new Dimension(200, 95));
+		help.setBackground(Color.decode("#1F2E1D"));
+		help.setForeground(Color.decode("#A8D1A5"));
 		help.addActionListener(new ActionListener() {
 
 			@Override
@@ -74,6 +80,8 @@ public class MasterMenu extends JPanel {
 
 		exit = new JButton("Exit Logifier");
 		exit.setPreferredSize(new Dimension(200, 95));
+		exit.setBackground(Color.decode("#1F2E1D"));
+		exit.setForeground(Color.decode("#A8D1A5"));
 		exit.addActionListener(new ActionListener() {
 
 			@Override

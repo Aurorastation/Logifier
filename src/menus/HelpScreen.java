@@ -20,29 +20,37 @@ public class HelpScreen extends JPanel {
 
 	//Method used to get everything ready, which is then called in the constructor
 	public void initHelp() {
-		setBackground(Color.BLACK);
 		setPreferredSize(new Dimension(700, 200));
 
 		//BorderLayout used here because the Help TextArea did not fit into my standard panelHolder set-up
 		setLayout(new BorderLayout());
 
 		//Sets up the Help TextArea menu. Hardcoded because no controls are customizable yet.
-		JTextArea helpTxt = new JTextArea(" Heya, this logifier has been made by Geeves."
+		JTextArea helpTxt = new JTextArea(" Heya, this logifier was made by Geeves, initially created in 2018, converted to darkmode in 2020."
+				+ "\n"
 				+ "\n Controls:"
 				+ "\n Escape - Exit to Main Menu (Will Exit program if pressed on main menu)"
-				+ "\n Space - Sets the text you want to go to next. (Must be viewing logs, full or searched)"
+				+ "\n Space - Sets the text you want to search for. (Must be viewing logs, full or searched)"
 				+ "\n F - Go to the next instance of the text you entered during the Space operation."
+				+ "\n D - Go to the previous instance of the text you entered during the Space operation."
+				+ "\n"
 				+ "\n Menus:"
 				+ "\n View Full Logs - This displays a colour-coded version of the logfile you have put into the folder."
 				+ "\n Search - This searches the logs for case insensitive occurances of the text you have entered."
+				+ "\n"
 				+ "\n How to use:"
 				+ "\n Take your log file, called something like 'bBxty-xFvt' and rename it to 'logifier', then place it in the same folder as 'logifier.jar'"
+				+ "\n"
 				+ "\n Additional info:"
-				+ "\n If anything horrible happens, contact me at Geeves#4318");
+				+ "\n If anything horrible happens, contact me at Geeves on discord.");
 		helpTxt.setFocusable(false);
+		helpTxt.setBackground(Color.decode("#223620"));
+		helpTxt.setForeground(Color.decode("#A8D1A5"));
 		add(helpTxt, BorderLayout.CENTER);
 
 		JButton back = new JButton("Back");
+		back.setBackground(Color.decode("#1F2E1D"));
+		back.setForeground(Color.decode("#A8D1A5"));
 		back.addActionListener(new ActionListener() {
 
 			@Override

@@ -47,19 +47,20 @@ public final class LogScreen extends JPanel {
 
 		for (int i = 0; i < logger.getFileSize(); i++) {
 			if (logColorArray.getType(i).equalsIgnoreCase("BASIC")) {
-				logScreen.append(Color.black, logger.getLogString(i));
+				logScreen.append(Color.decode("#A8D1A5"), logger.getLogString(i));
 			} else if (logColorArray.getType(i).equalsIgnoreCase("ADMIN")) {
-				logScreen.append(Color.red, logger.getLogString(i));
+				logScreen.append(Color.decode("#B85B56"), logger.getLogString(i));
 			} else if (logColorArray.getType(i).equalsIgnoreCase("OOC")) {
-				logScreen.append(Color.blue, logger.getLogString(i));
+				logScreen.append(Color.decode("#5575A6"), logger.getLogString(i));
 			} else if (logColorArray.getType(i).equalsIgnoreCase("ATTACK")) {
-				logScreen.append(Color.MAGENTA, logger.getLogString(i));
+				logScreen.append(Color.decode("#BF569A"), logger.getLogString(i));
 			} else if (logColorArray.getType(i).equalsIgnoreCase("IGNORE")) {
 				logScreen.append(Color.gray, logger.getLogString(i));
 			}
 		}
 		logScreen.setEditable(false);
 		scrollPanel.setViewportView(logScreen);
+		scrollPanel.getViewport().getView().setBackground(Color.decode("#2B4037"));
 
 		setVisible(true);
 
@@ -75,6 +76,10 @@ public final class LogScreen extends JPanel {
 		getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("F") ,
 				"fPressed");
 		getActionMap().put("fPressed", searcher);
+
+		getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("D") ,
+				"dPressed"); // hehe depressed
+		getActionMap().put("dPressed", reverseSearcher);
 	}
 
 	public void initSearchedView(String search) {
@@ -95,19 +100,20 @@ public final class LogScreen extends JPanel {
 
 		for (int i = 0; i < logger.getSearchedSize(); i++) {
 			if (logColorArray.getSType(i).equalsIgnoreCase("BASIC")) {
-				logScreen.append(Color.black, logger.getSearchedString(i));
+				logScreen.append(Color.decode("#A8D1A5"), logger.getSearchedString(i));
 			} else if (logColorArray.getSType(i).equalsIgnoreCase("ADMIN")) {
-				logScreen.append(Color.red, logger.getSearchedString(i));
+				logScreen.append(Color.decode("#B85B56"), logger.getSearchedString(i));
 			} else if (logColorArray.getSType(i).equalsIgnoreCase("OOC")) {
-				logScreen.append(Color.blue, logger.getSearchedString(i));
+				logScreen.append(Color.decode("#5575A6"), logger.getSearchedString(i));
 			} else if (logColorArray.getSType(i).equalsIgnoreCase("ATTACK")) {
-				logScreen.append(Color.MAGENTA, logger.getSearchedString(i));
+				logScreen.append(Color.decode("#BF569A"), logger.getSearchedString(i));
 			} else if (logColorArray.getSType(i).equalsIgnoreCase("IGNORE")) {
 				logScreen.append(Color.gray, logger.getSearchedString(i));
 			}
 		}
 		logScreen.setEditable(false);
 		scrollPanel.setViewportView(logScreen);
+		scrollPanel.getViewport().getView().setBackground(Color.decode("#2B4037"));
 
 		setVisible(true);
 
@@ -122,6 +128,10 @@ public final class LogScreen extends JPanel {
 		getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("F") ,
 				"fPressed");
 		getActionMap().put("fPressed", searcher);
+
+		getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("D") ,
+				"dPressed"); // hehe depressed
+		getActionMap().put("dPressed", reverseSearcher);
 	}
 
 	public void initMultiSearchedView(String search, String search2) {
@@ -142,19 +152,20 @@ public final class LogScreen extends JPanel {
 
 		for (int i = 0; i < logger.getSearchedSize(); i++) {
 			if (logColorArray.getSType(i).equalsIgnoreCase("BASIC")) {
-				logScreen.append(Color.black, logger.getSearchedString(i));
+				logScreen.append(Color.decode("#A8D1A5"), logger.getSearchedString(i));
 			} else if (logColorArray.getSType(i).equalsIgnoreCase("ADMIN")) {
-				logScreen.append(Color.red, logger.getSearchedString(i));
+				logScreen.append(Color.decode("#B85B56"), logger.getSearchedString(i));
 			} else if (logColorArray.getSType(i).equalsIgnoreCase("OOC")) {
-				logScreen.append(Color.blue, logger.getSearchedString(i));
+				logScreen.append(Color.decode("#5575A6"), logger.getSearchedString(i));
 			} else if (logColorArray.getSType(i).equalsIgnoreCase("ATTACK")) {
-				logScreen.append(Color.MAGENTA, logger.getSearchedString(i));
+				logScreen.append(Color.decode("#BF569A"), logger.getSearchedString(i));
 			} else if (logColorArray.getSType(i).equalsIgnoreCase("IGNORE")) {
 				logScreen.append(Color.gray, logger.getSearchedString(i));
 			}
 		}
 		logScreen.setEditable(false);
 		scrollPanel.setViewportView(logScreen);
+		scrollPanel.getViewport().getView().setBackground(Color.decode("#2B4037"));
 
 		setVisible(true);
 
@@ -169,6 +180,10 @@ public final class LogScreen extends JPanel {
 		getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("F") ,
 				"fPressed");
 		getActionMap().put("fPressed", searcher);
+
+		getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("D") ,
+				"dPressed"); // hehe depressed
+		getActionMap().put("dPressed", reverseSearcher);
 	}
 
 	Action exit = new AbstractAction() {
@@ -199,31 +214,56 @@ public final class LogScreen extends JPanel {
 					if (pos + findLength > document.getLength()) {
 						pos = 0;
 					}
-
 					while (pos + findLength <= document.getLength()) {
-
 						String match = document.getText(pos, findLength).toLowerCase();
-
 						if (match.equals(find)) {
 							found = true;
 							break;
 						}
 						pos++;
 					}
-
-
-					if (found) {
-
+					if(found) {
 						Rectangle viewRect = logScreen.modelToView(pos);
-
 						logScreen.scrollRectToVisible(viewRect);
-
 						logScreen.setCaretPosition(pos + findLength);
 						logScreen.moveCaretPosition(pos);
-
 						pos += findLength;
 					}
+				} catch (BadLocationException exp) {
+					exp.printStackTrace();
+				}
 
+			}
+		}
+	};
+
+	Action reverseSearcher = new AbstractAction() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			logScreen.requestFocusInWindow();
+			if (find != null && find.length() > 0) {
+				Document document = logScreen.getDocument();
+				int findLength = find.length();
+				try {
+					boolean found = false;
+					if (pos == 0 || pos + findLength > document.getLength()) {
+						pos = document.getLength() - findLength;
+					}
+					while (pos > 0) {
+						String match = document.getText(pos, findLength).toLowerCase();
+						if (match.equals(find)) {
+							found = true;
+							break;
+						}
+						pos--;
+					}
+					if(found) {
+						Rectangle viewRect = logScreen.modelToView(pos);
+						logScreen.scrollRectToVisible(viewRect);
+						logScreen.setCaretPosition(pos + findLength);
+						logScreen.moveCaretPosition(pos);
+						pos--;
+					}
 				} catch (BadLocationException exp) {
 					exp.printStackTrace();
 				}
