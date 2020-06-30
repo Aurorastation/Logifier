@@ -55,8 +55,8 @@ public class HelpScreen extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				main.main.ExitToMain();
 				setVisible(false);
+				main.main.ExitToMain();
 			}
 		});
 		add(back, BorderLayout.SOUTH);
@@ -73,8 +73,8 @@ public class HelpScreen extends JPanel {
 	Action exit = new AbstractAction() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			main.main.ExitToMain();
 			setVisible(false);
+			main.main.ExitToMain();
 		}
 	};
 }

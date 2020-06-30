@@ -20,7 +20,6 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 
 public class ColorPane extends JTextPane {
-
 	public void appendNaive(Color c, String s) { // naive implementation
 		// bad: instiantiates a new AttributeSet object on each call
 		SimpleAttributeSet aset = new SimpleAttributeSet();

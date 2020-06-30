@@ -11,7 +11,7 @@ public class logger {
 	private static int searchedSize = 0;
 	private static String[] logArr;
 	private static String[] searchArr;
-	private static String fileName = "";
+	private static File logFile = new File(".");
 	private static String logID;
 
 	public static void populateLog() {
@@ -21,12 +21,14 @@ public class logger {
 			File[] filesList = curDir.listFiles();
 			for(File f : filesList) {
 				if(f.isFile()) {
-					if(f.getName().equals("logifier.log")) fileName = "logifier.log";
-					if(f.getName().equals("logifier.txt")) fileName = "logifier.txt";
+					if(f.getName().equals("logifier.log") || f.getName().equals("logifier.txt")) {
+						logFile = f;
+						break;
+					}
 				}
 			}
 
-			fileScan = new Scanner(new File(fileName));
+			fileScan = new Scanner(logFile);
 
 			while (fileScan.hasNextLine()) {
 				fileSize++;
@@ -36,7 +38,7 @@ public class logger {
 
 			logArr = new String[fileSize];
 
-			fileScan = new Scanner(new File(fileName));
+			fileScan = new Scanner(logFile);
 
 			for (int i = 0; i < fileSize; i++) {
 				logArr[i] = fileScan.nextLine() + "\n";
@@ -84,7 +86,7 @@ public class logger {
 		Scanner fileScan;
 		try {
 			String temp = "";
-			fileScan = new Scanner(new File(fileName));
+			fileScan = new Scanner(logFile);
 
 			searchedSize = 0;
 
@@ -99,7 +101,7 @@ public class logger {
 			searchArr = new String[searchedSize];
 			logColorArray.initSearchArr(searchedSize);
 
-			fileScan = new Scanner(new File(fileName));
+			fileScan = new Scanner(logFile);
 			String temp2 = "";
 			int searchPos = 0;
 
@@ -152,7 +154,7 @@ public class logger {
 		Scanner fileScan;
 		try {
 			String temp = "";
-			fileScan = new Scanner(new File(fileName));
+			fileScan = new Scanner(logFile);
 
 			searchedSize = 0;
 
@@ -167,7 +169,7 @@ public class logger {
 			searchArr = new String[searchedSize];
 			logColorArray.initSearchArr(searchedSize);
 
-			fileScan = new Scanner(new File(fileName));
+			fileScan = new Scanner(logFile);
 			String temp2 = "";
 			int searchPos = 0;
 

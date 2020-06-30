@@ -38,11 +38,10 @@ public final class LogScreen extends JPanel {
 	//Method used to get everything ready, which is then called in the constructor
 	public void initLogView() {
 		setBackground(Color.BLACK);
-		setPreferredSize(new Dimension(700, 600));
 		setLayout(new BorderLayout());
 
 		JScrollPane scrollPanel = new JScrollPane();
-		add(scrollPanel).setPreferredSize(new Dimension(700, 600));
+		add(scrollPanel).setPreferredSize(new Dimension(LogScreen.WIDTH, LogScreen.HEIGHT));
 		scrollPanel.setFocusable(false);
 
 		for (int i = 0; i < logger.getFileSize(); i++) {
@@ -84,8 +83,8 @@ public final class LogScreen extends JPanel {
 
 	public void initSearchedView(String search) {
 		if (search == null) {
-			main.main.ExitToMain();
 			setVisible(false);
+			main.main.ExitToMain();
 			return;
 		}
 		setLayout(new BorderLayout());
@@ -135,9 +134,9 @@ public final class LogScreen extends JPanel {
 	}
 
 	public void initMultiSearchedView(String search, String search2) {
-		if (search == null) {
-			main.main.ExitToMain();
+		if (search == null || search2 == null) {
 			setVisible(false);
+			main.main.ExitToMain();
 			return;
 		}
 		setLayout(new BorderLayout());
@@ -189,8 +188,8 @@ public final class LogScreen extends JPanel {
 	Action exit = new AbstractAction() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			main.main.ExitToMain();
 			setVisible(false);
+			main.main.ExitToMain();
 		}
 	};
 
