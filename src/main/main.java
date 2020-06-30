@@ -43,27 +43,26 @@ public class main {
 
 	//Called by MasterMenu to add the OptionScreen onto the JFrame
 	public static void viewSearchedLogs() {
-		JPanel log;
-		String[] searchTerms = new String[2];
-		searchTerms[0] = JOptionPane.showInputDialog(null, "Please insert the first word, ckey or phrase you are looking for. Leave blank to get full logs. Press cancel to cancel search entirely.");
-		if(searchTerms[0] == null) {
-			return;
-		}
-		else if(searchTerms[0].isEmpty() == true) {
-			log = new LogScreen(null);
-		}
-		else
-		{
-			searchTerms[1] = JOptionPane.showInputDialog(null, "Please insert the second word, ckey or phrase you are looking for. Leave blank if you don't want to search for a second word. Press cancel to cancel search entirely.");
-			if(searchTerms[1] == null) {
+		JPanel log = null;
+		String[] searchTerms = new String[10];
+		int searchNum = 0;
+		do {
+			searchTerms[searchNum] = JOptionPane.showInputDialog(null, "Please enter the word you wish to search for. Leave blank to search using the entered terms. Press cancel to abort searching entirely.\nLimit: 10 words Current word: " + (searchNum + 1));
+			if(searchTerms[searchNum] == null) {
 				return;
 			}
-			else {
+			else if(searchTerms[searchNum].isEmpty() == true) {
 				log = new LogScreen(searchTerms);
 			}
+			searchNum++;
+			if(searchNum == searchTerms.length) {
+				log = new LogScreen(searchTerms);
+			}
+		} while (log == null);
+		if(log != null) {
+			menu.setVisible(false);
+			base.add(log);
 		}
-		menu.setVisible(false);
-		base.add(log);
 	}
 
 	////Called by MasterMenu to add the HelpScreen onto the JFrame

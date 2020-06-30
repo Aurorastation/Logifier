@@ -31,9 +31,15 @@ public class logger {
 			fileScan = new Scanner(logFile);
 
 			boolean searching = false;
+			int searchWordsLength = 0;
 			if(searchWords != null && searchWords.length > 0) {
 				searching = true;
 				searchedSize = 0;
+				for(int i = 0; i < searchWords.length; i++) {
+					if(searchWords[i] != null && searchWords[i].length() > 0) {
+						searchWordsLength++;
+					}
+				}
 			}
 			else {
 				fileSize = 0;
@@ -43,7 +49,7 @@ public class logger {
 			while(fileScan.hasNextLine()) {
 				lineHolder = fileScan.nextLine();
 				if(searching == true) {
-					for(int i = 0; i < searchWords.length; i++) {
+					for(int i = 0; i < searchWordsLength; i++) {
 						if(searchWords[i].length() > 0 && lineHolder.toLowerCase().contains(searchWords[i].toLowerCase())) {
 							searchedSize++;
 							break;
@@ -73,7 +79,7 @@ public class logger {
 				lineHolder = fileScan.nextLine() + "\n";
 				if(searching == true) {
 					hasWord = false;
-					for(int j = 0; j < searchWords.length; j++) {
+					for(int j = 0; j < searchWordsLength; j++) {
 						if(searchWords[j].length() > 0 && lineHolder.toLowerCase().contains(searchWords[j].toLowerCase())) {
 							hasWord = true;
 							searchArr[searchArrCount] = lineHolder;
