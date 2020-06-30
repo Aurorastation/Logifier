@@ -11,7 +11,7 @@ public class logger {
 	private static int searchedSize = 0;
 	private static String[] logArr;
 	private static String[] searchArr;
-	private static String fileName;
+	private static String fileName = "";
 	private static String logID;
 
 	public static void populateLog() {
