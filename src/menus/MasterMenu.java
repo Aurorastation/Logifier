@@ -14,11 +14,6 @@ import main.*;
 
 public class MasterMenu extends JPanel {
 
-	private final JButton start;
-	private final JButton options;
-	private final JButton exit;
-	private final JButton help;
-
 	public MasterMenu() {
 		setPreferredSize(new Dimension(700, 650));
 
@@ -36,69 +31,57 @@ public class MasterMenu extends JPanel {
 			}
 		}
 
-		start = new JButton("View Full Logs");
-		start.setPreferredSize(new Dimension(200, 95));
-		start.setBackground(Color.decode("#1F2E1D"));
-		start.setForeground(Color.decode("#A8D1A5"));
+		JButton start = createButton("View Full Logs");
 		start.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				main.viewLogs();
 			}
 		});
-
 		panelHolder[1][1].add(start);
 
-		options = new JButton("Search");
-		options.setPreferredSize(new Dimension(200, 95));
-		options.setBackground(Color.decode("#1F2E1D"));
-		options.setForeground(Color.decode("#A8D1A5"));
+		JButton options = createButton("Search");
 		options.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				main.viewSearchedLogs();
 			}
 		});
-
 		panelHolder[2][1].add(options);
 
-		help = new JButton("Help");
-		help.setPreferredSize(new Dimension(200, 95));
-		help.setBackground(Color.decode("#1F2E1D"));
-		help.setForeground(Color.decode("#A8D1A5"));
+		JButton help = createButton("Help");
 		help.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				main.OpenHelp();
 			}
 		});
-
 		panelHolder[3][1].add(help);;
 
-		exit = new JButton("Exit Logifier");
-		exit.setPreferredSize(new Dimension(200, 95));
-		exit.setBackground(Color.decode("#1F2E1D"));
-		exit.setForeground(Color.decode("#A8D1A5"));
+		JButton exit = createButton("Exit Logifier");
 		exit.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
 		});
-
 		panelHolder[4][1].add(exit);
 
-		getInputMap().put(KeyStroke.getKeyStroke("ESCAPE"),
+		getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ESCAPE"),
 				"escapePressed");
 		getActionMap().put("escapePressed",
 				exitEsc);
 
 		setVisible(true);
 
+	}
+
+	private JButton createButton(String buttonText) {
+		JButton button = new JButton(buttonText);
+		button.setPreferredSize(new Dimension(200, 95));
+		button.setBackground(Color.decode("#1F2E1D"));
+		button.setForeground(Color.decode("#A8D1A5"));
+		return button;
 	}
 
 	Action exitEsc = new AbstractAction() {
