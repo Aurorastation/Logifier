@@ -43,33 +43,33 @@ public class logger {
 			for (int i = 0; i < fileSize; i++) {
 				logArr[i] = fileScan.nextLine() + "\n";
 				if (logArr[i].contains("ADMIN")) {
-					logColorArray.setType(i, "ADMIN", false);
+					logColorArray.setColor(i, "#B85B56", false);
 				} else if (logArr[i].contains("OOC")) {
-					logColorArray.setType(i, "OOC", false);
+					logColorArray.setColor(i, "#5575A6", false);
 				} else if (logArr[i].contains("ATTACK")) {
-					logColorArray.setType(i, "ATTACK", false);
+					logColorArray.setColor(i, "#BF569A", false);
 				} else if (logArr[i].contains("ACCESS")) {
-					logColorArray.setType(i, "IGNORE", false);
+					logColorArray.setColor(i, "#223620", false);
 				} else if (logArr[i].contains("DEBUG")) {
-					logColorArray.setType(i, "IGNORE", false);
+					logColorArray.setColor(i, "#223620", false);
 				} else if (logArr[i].contains("SS")) {
-					logColorArray.setType(i, "IGNORE", false);
+					logColorArray.setColor(i, "#223620", false);
 				} else if (logArr[i].contains("GC")) {
-					logColorArray.setType(i, "IGNORE", false);
+					logColorArray.setColor(i, "#223620", false);
 				} else if (logArr[i].contains("Mouse")) {
-					logColorArray.setType(i, "IGNORE", false);
+					logColorArray.setColor(i, "#223620", false);
 				} else if (logArr[i].contains("TGS")) {
-					logColorArray.setType(i, "IGNORE", false);
+					logColorArray.setColor(i, "#223620", false);
 				} else if (logArr[i].contains("TOPIC")) {
-					logColorArray.setType(i, "IGNORE", false);
+					logColorArray.setColor(i, "#223620", false);
 				} else if (logArr[i].contains("MASTER")) {
-					logColorArray.setType(i, "IGNORE", false);
+					logColorArray.setColor(i, "#223620", false);
 				} else if (logArr[i].contains("VOTE")) {
-					logColorArray.setType(i, "IGNORE", false);
+					logColorArray.setColor(i, "#223620", false);
 				} else if (logArr[i].contains("GAME")) {
-					logColorArray.setType(i, "IGNORE", false);
+					logColorArray.setColor(i, "#223620", false);
 				} else {
-					logColorArray.setType(i, "BASIC", false);
+					logColorArray.setColor(i, "#A8D1A5", false);
 				}
 			}
 			Integer IDIndex = logArr[2].indexOf("ID: ");
@@ -111,33 +111,33 @@ public class logger {
 				if (temp2.toLowerCase().contains(search.toLowerCase())) {
 					searchArr[searchPos] = temp2;
 					if (searchArr[searchPos].contains("ADMIN")) {
-						logColorArray.setType(searchPos, "ADMIN", true);
+						logColorArray.setColor(searchPos, "#B85B56", true);
 					} else if (searchArr[searchPos].contains("OOC")) {
-						logColorArray.setType(searchPos, "OOC", true);
+						logColorArray.setColor(searchPos, "#5575A6", true);
 					} else if (searchArr[searchPos].contains("ATTACK")) {
-						logColorArray.setType(searchPos, "ATTACK", true);
+						logColorArray.setColor(searchPos, "#BF569A", true);
 					} else if (searchArr[searchPos].contains("ACCESS")) {
-						logColorArray.setType(searchPos, "IGNORE", true);
+						logColorArray.setColor(searchPos, "#223620", true);
 					} else if (searchArr[searchPos].contains("DEBUG")) {
-						logColorArray.setType(searchPos, "IGNORE", true);
+						logColorArray.setColor(searchPos, "#223620", true);
 					} else if (searchArr[searchPos].contains("SS")) {
-						logColorArray.setType(searchPos, "IGNORE", true);
+						logColorArray.setColor(searchPos, "#223620", true);
 					} else if (searchArr[searchPos].contains("GC")) {
-						logColorArray.setType(searchPos, "IGNORE", true);
+						logColorArray.setColor(searchPos, "#223620", true);
 					} else if (searchArr[searchPos].contains("mouse")) {
-						logColorArray.setType(searchPos, "IGNORE", true);
+						logColorArray.setColor(searchPos, "#223620", true);
 					} else if (searchArr[searchPos].contains("TGS")) {
-						logColorArray.setType(searchPos, "IGNORE", true);
+						logColorArray.setColor(searchPos, "#223620", true);
 					} else if (searchArr[searchPos].contains("TOPIC")) {
-						logColorArray.setType(searchPos, "IGNORE", true);
+						logColorArray.setColor(searchPos, "#223620", true);
 					} else if (searchArr[searchPos].contains("MASTER")) {
-						logColorArray.setType(searchPos, "IGNORE", true);
+						logColorArray.setColor(searchPos, "#223620", true);
 					} else if (searchArr[searchPos].contains("VOTE")) {
-						logColorArray.setType(searchPos, "IGNORE", true);
+						logColorArray.setColor(searchPos, "#223620", true);
 					} else if (searchArr[searchPos].contains("GAME")) {
-						logColorArray.setType(searchPos, "IGNORE", true);
+						logColorArray.setColor(searchPos, "#223620", true);
 					} else {
-						logColorArray.setType(searchPos, "BASIC", true);
+						logColorArray.setColor(searchPos, "#A8D1A5", true);
 					}
 					searchPos++;
 				}
@@ -179,33 +179,33 @@ public class logger {
 				if (temp2.toLowerCase().contains(search.toLowerCase()) || temp2.toLowerCase().contains(search2.toLowerCase())) {
 					searchArr[searchPos] = temp2;
 					if (searchArr[searchPos].contains("ADMIN")) {
-						logColorArray.setType(searchPos, "ADMIN", true);
+						logColorArray.setColor(searchPos, "#B85B56", true);
 					} else if (searchArr[searchPos].contains("OOC")) {
-						logColorArray.setType(searchPos, "OOC", true);
+						logColorArray.setColor(searchPos, "#5575A6", true);
 					} else if (searchArr[searchPos].contains("ATTACK")) {
-						logColorArray.setType(searchPos, "ATTACK", true);
+						logColorArray.setColor(searchPos, "#BF569A", true);
 					} else if (searchArr[searchPos].contains("ACCESS")) {
-						logColorArray.setType(searchPos, "IGNORE", true);
+						logColorArray.setColor(searchPos, "#223620", true);
 					} else if (searchArr[searchPos].contains("DEBUG")) {
-						logColorArray.setType(searchPos, "IGNORE", true);
+						logColorArray.setColor(searchPos, "#223620", true);
 					} else if (searchArr[searchPos].contains("SS")) {
-						logColorArray.setType(searchPos, "IGNORE", true);
+						logColorArray.setColor(searchPos, "#223620", true);
 					} else if (searchArr[searchPos].contains("GC")) {
-						logColorArray.setType(searchPos, "IGNORE", true);
+						logColorArray.setColor(searchPos, "#223620", true);
 					} else if (searchArr[searchPos].contains("mouse")) {
-						logColorArray.setType(searchPos, "IGNORE", true);
+						logColorArray.setColor(searchPos, "#223620", true);
 					} else if (searchArr[searchPos].contains("TGS")) {
-						logColorArray.setType(searchPos, "IGNORE", true);
+						logColorArray.setColor(searchPos, "#223620", true);
 					} else if (searchArr[searchPos].contains("TOPIC")) {
-						logColorArray.setType(searchPos, "IGNORE", true);
+						logColorArray.setColor(searchPos, "#223620", true);
 					} else if (searchArr[searchPos].contains("MASTER")) {
-						logColorArray.setType(searchPos, "IGNORE", true);
+						logColorArray.setColor(searchPos, "#223620", true);
 					} else if (searchArr[searchPos].contains("VOTE")) {
-						logColorArray.setType(searchPos, "IGNORE", true);
+						logColorArray.setColor(searchPos, "#223620", true);
 					} else if (searchArr[searchPos].contains("GAME")) {
-						logColorArray.setType(searchPos, "IGNORE", true);
+						logColorArray.setColor(searchPos, "#223620", true);
 					} else {
-						logColorArray.setType(searchPos, "BASIC", true);
+						logColorArray.setColor(searchPos, "#A8D1A5", true);
 					}
 					searchPos++;
 				}

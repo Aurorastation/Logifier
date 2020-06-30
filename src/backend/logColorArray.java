@@ -4,7 +4,7 @@ public class logColorArray {
 	private static String[] type = new String[logger.getFileSize(false)];
 	private static String[] sType;
 
-	public static void setType(int arrayNum, String type, boolean search) {
+	public static void setColor(int arrayNum, String type, boolean search) {
 		if(search == true) {
 			logColorArray.sType[arrayNum] = type;
 		}
@@ -12,7 +12,7 @@ public class logColorArray {
 			logColorArray.type[arrayNum] = type;
 		}
 	}
-	public static String getType(int arrayNum, boolean search) {
+	public static String getColor(int arrayNum, boolean search) {
 		if(search == true) {
 			return sType[arrayNum];
 		}

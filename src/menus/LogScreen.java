@@ -34,11 +34,9 @@ public final class LogScreen extends JPanel {
 
 		boolean isSearching = false;
 		if(searchWords != null && searchWords.length > 0) {
-			System.out.println("isSearching is true");
 			isSearching = true;
 		}
 
-		System.out.println("checking isSearching");
 		if(isSearching == true) {
 			Integer searchLength = 0;
 			for(int i = 0; i < searchWords.length; i++) {
@@ -47,10 +45,8 @@ public final class LogScreen extends JPanel {
 				}
 			}
 			if(searchLength == 1) {
-				System.out.println("searching for one word: " + searchWords[0]);
 				logger.populateSearch(searchWords[0]);
 			} else if(searchLength == 2) {
-				System.out.println("searching for two words: " + searchWords[0] + " and " + searchWords[1]);
 				logger.populateMultiSearch(searchWords[0], searchWords[1]);
 			}
 		}
@@ -60,17 +56,7 @@ public final class LogScreen extends JPanel {
 		scrollPanel.setFocusable(false);
 
 		for (int i = 0; i < logger.getFileSize(isSearching); i++) {
-			if (logColorArray.getType(i, isSearching).equalsIgnoreCase("BASIC")) {
-				logScreen.append(Color.decode("#A8D1A5"), logger.getLogString(i, isSearching));
-			} else if (logColorArray.getType(i, isSearching).equalsIgnoreCase("ADMIN")) {
-				logScreen.append(Color.decode("#B85B56"), logger.getLogString(i, isSearching));
-			} else if (logColorArray.getType(i, isSearching).equalsIgnoreCase("OOC")) {
-				logScreen.append(Color.decode("#5575A6"), logger.getLogString(i, isSearching));
-			} else if (logColorArray.getType(i, isSearching).equalsIgnoreCase("ATTACK")) {
-				logScreen.append(Color.decode("#BF569A"), logger.getLogString(i, isSearching));
-			} else if (logColorArray.getType(i, isSearching).equalsIgnoreCase("IGNORE")) {
-				logScreen.append(Color.gray, logger.getLogString(i, isSearching));
-			}
+			logScreen.append(Color.decode(logColorArray.getColor(i, isSearching)), logger.getLogString(i, isSearching));
 		}
 		logScreen.setEditable(false);
 		scrollPanel.setViewportView(logScreen);
