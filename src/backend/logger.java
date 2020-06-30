@@ -13,6 +13,7 @@ public class logger {
 	private static String[] searchArr;
 	private static File logFile = new File(".");
 	private static String logID;
+	private static String date;
 
 	public static void populateLog(String[] searchWords) {
 		Scanner fileScan;
@@ -131,6 +132,10 @@ public class logger {
 				IDIndex = IDIndex + 4;
 				Integer bracketIndex = logArr[2].indexOf(")");
 				logID = logArr[2].substring(IDIndex, bracketIndex);
+
+				Integer dateOpenIndex = logArr[0].indexOf("[");
+				date = logArr[0].substring(dateOpenIndex + 1, dateOpenIndex + 12);
+				System.out.println(date);
 			}
 		} catch (FileNotFoundException ex) {
 			JOptionPane.showMessageDialog(null, "The logifier text file not found! Make sure you named it correctly! Logs will be bugged!");
@@ -155,6 +160,7 @@ public class logger {
 		}
 		returnString = returnString.replaceAll("&#34;", "\"");
 		returnString = returnString.replaceAll("&#39;", "'");
+		if (arrNum != 0) returnString = returnString.replaceAll(date, "");
 		if (arrNum != 2) returnString = returnString.replaceAll(logID + " ", "");
 		return returnString;
 	}

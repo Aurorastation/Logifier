@@ -47,7 +47,7 @@ public class main {
 		String[] searchTerms = new String[10];
 		int searchNum = 0;
 		do {
-			searchTerms[searchNum] = JOptionPane.showInputDialog(null, "Please enter the word you wish to search for. Leave blank to search using the entered terms. Press cancel to abort searching entirely.\nLimit: 10 words Current word: " + (searchNum + 1));
+			searchTerms[searchNum] = JOptionPane.showInputDialog(null, "Please enter the word you wish to search for. Leave blank to search using the entered terms. Press cancel to abort searching entirely.\n| Limit: 10 Words | Current Word: " + (searchNum + 1) + " |");
 			if(searchTerms[searchNum] == null) {
 				return;
 			}
