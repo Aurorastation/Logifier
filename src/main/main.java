@@ -37,32 +37,29 @@ public class main {
 	//Called by MasterMenu to add the GameScreen onto the JFrame
 	public static void viewLogs() {
 		menu.setVisible(false);
-		JPanel log = new LogScreen();
+		JPanel log = new LogScreen(null);
 		base.add(log);
 	}
 
 	//Called by MasterMenu to add the OptionScreen onto the JFrame
 	public static void viewSearchedLogs() {
 		JPanel log;
-		String message = JOptionPane.showInputDialog(null, "Please insert the first word, ckey or phrase you are looking for. Leave blank to get full logs. Press cancel to cancel search entirely.");
-		if(message == null) {
+		String[] searchTerms = new String[2];
+		searchTerms[0] = JOptionPane.showInputDialog(null, "Please insert the first word, ckey or phrase you are looking for. Leave blank to get full logs. Press cancel to cancel search entirely.");
+		if(searchTerms[0] == null) {
 			return;
 		}
-		else if(message.isEmpty() == true) {
-			log = new LogScreen();
+		else if(searchTerms[0].isEmpty() == true) {
+			log = new LogScreen(null);
 		}
 		else
 		{
-			String message2 = JOptionPane.showInputDialog(null, "Please insert the second word, ckey or phrase you are looking for. Leave blank if you don't want to search for a second word. Press cancel to cancel search entirely.");
-			if(message2 == null) {
+			searchTerms[1] = JOptionPane.showInputDialog(null, "Please insert the second word, ckey or phrase you are looking for. Leave blank if you don't want to search for a second word. Press cancel to cancel search entirely.");
+			if(searchTerms[1] == null) {
 				return;
 			}
-			else if(message2.isEmpty() == true)
-			{
-				log = new LogScreen(message);
-			}
 			else {
-				log = new LogScreen(message, message2);
+				log = new LogScreen(searchTerms);
 			}
 		}
 		menu.setVisible(false);

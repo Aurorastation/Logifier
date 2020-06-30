@@ -1,25 +1,27 @@
 package backend;
 
 public class logColorArray {
-	private static String[] type = new String[logger.getFileSize()];
+	private static String[] type = new String[logger.getFileSize(false)];
 	private static String[] sType;
 
-	public static void setType(int arrayNum, String type) {
-		logColorArray.type[arrayNum] = type;
+	public static void setType(int arrayNum, String type, boolean search) {
+		if(search == true) {
+			logColorArray.sType[arrayNum] = type;
+		}
+		else {
+			logColorArray.type[arrayNum] = type;
+		}
 	}
-	public static String getType(int arrayNum) {
-		return type[arrayNum];
+	public static String getType(int arrayNum, boolean search) {
+		if(search == true) {
+			return sType[arrayNum];
+		}
+		else {
+			return type[arrayNum];
+		}
 	}
 
 	public static void initSearchArr(int arrSize) {
 		sType = new String[arrSize];
-	}
-
-	public static void setSType(int arrayNum, String type) {
-		logColorArray.sType[arrayNum] = type;
-	}
-
-	public static String getSType(int arrayNum) {
-		return sType[arrayNum];
 	}
 }

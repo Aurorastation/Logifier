@@ -43,33 +43,33 @@ public class logger {
 			for (int i = 0; i < fileSize; i++) {
 				logArr[i] = fileScan.nextLine() + "\n";
 				if (logArr[i].contains("ADMIN")) {
-					logColorArray.setType(i, "ADMIN");
+					logColorArray.setType(i, "ADMIN", false);
 				} else if (logArr[i].contains("OOC")) {
-					logColorArray.setType(i, "OOC");
+					logColorArray.setType(i, "OOC", false);
 				} else if (logArr[i].contains("ATTACK")) {
-					logColorArray.setType(i, "ATTACK");
+					logColorArray.setType(i, "ATTACK", false);
 				} else if (logArr[i].contains("ACCESS")) {
-					logColorArray.setType(i, "IGNORE");
+					logColorArray.setType(i, "IGNORE", false);
 				} else if (logArr[i].contains("DEBUG")) {
-					logColorArray.setType(i, "IGNORE");
+					logColorArray.setType(i, "IGNORE", false);
 				} else if (logArr[i].contains("SS")) {
-					logColorArray.setType(i, "IGNORE");
+					logColorArray.setType(i, "IGNORE", false);
 				} else if (logArr[i].contains("GC")) {
-					logColorArray.setType(i, "IGNORE");
+					logColorArray.setType(i, "IGNORE", false);
 				} else if (logArr[i].contains("Mouse")) {
-					logColorArray.setType(i, "IGNORE");
+					logColorArray.setType(i, "IGNORE", false);
 				} else if (logArr[i].contains("TGS")) {
-					logColorArray.setType(i, "IGNORE");
+					logColorArray.setType(i, "IGNORE", false);
 				} else if (logArr[i].contains("TOPIC")) {
-					logColorArray.setType(i, "IGNORE");
+					logColorArray.setType(i, "IGNORE", false);
 				} else if (logArr[i].contains("MASTER")) {
-					logColorArray.setType(i, "IGNORE");
+					logColorArray.setType(i, "IGNORE", false);
 				} else if (logArr[i].contains("VOTE")) {
-					logColorArray.setType(i, "IGNORE");
+					logColorArray.setType(i, "IGNORE", false);
 				} else if (logArr[i].contains("GAME")) {
-					logColorArray.setType(i, "IGNORE");
+					logColorArray.setType(i, "IGNORE", false);
 				} else {
-					logColorArray.setType(i, "BASIC");
+					logColorArray.setType(i, "BASIC", false);
 				}
 			}
 			Integer IDIndex = logArr[2].indexOf("ID: ");
@@ -111,33 +111,33 @@ public class logger {
 				if (temp2.toLowerCase().contains(search.toLowerCase())) {
 					searchArr[searchPos] = temp2;
 					if (searchArr[searchPos].contains("ADMIN")) {
-						logColorArray.setSType(searchPos, "ADMIN");
+						logColorArray.setType(searchPos, "ADMIN", true);
 					} else if (searchArr[searchPos].contains("OOC")) {
-						logColorArray.setSType(searchPos, "OOC");
+						logColorArray.setType(searchPos, "OOC", true);
 					} else if (searchArr[searchPos].contains("ATTACK")) {
-						logColorArray.setSType(searchPos, "ATTACK");
+						logColorArray.setType(searchPos, "ATTACK", true);
 					} else if (searchArr[searchPos].contains("ACCESS")) {
-						logColorArray.setSType(searchPos, "IGNORE");
+						logColorArray.setType(searchPos, "IGNORE", true);
 					} else if (searchArr[searchPos].contains("DEBUG")) {
-						logColorArray.setSType(searchPos, "IGNORE");
+						logColorArray.setType(searchPos, "IGNORE", true);
 					} else if (searchArr[searchPos].contains("SS")) {
-						logColorArray.setSType(searchPos, "IGNORE");
+						logColorArray.setType(searchPos, "IGNORE", true);
 					} else if (searchArr[searchPos].contains("GC")) {
-						logColorArray.setSType(searchPos, "IGNORE");
+						logColorArray.setType(searchPos, "IGNORE", true);
 					} else if (searchArr[searchPos].contains("mouse")) {
-						logColorArray.setSType(searchPos, "IGNORE");
+						logColorArray.setType(searchPos, "IGNORE", true);
 					} else if (searchArr[searchPos].contains("TGS")) {
-						logColorArray.setSType(searchPos, "IGNORE");
+						logColorArray.setType(searchPos, "IGNORE", true);
 					} else if (searchArr[searchPos].contains("TOPIC")) {
-						logColorArray.setSType(searchPos, "IGNORE");
+						logColorArray.setType(searchPos, "IGNORE", true);
 					} else if (searchArr[searchPos].contains("MASTER")) {
-						logColorArray.setSType(searchPos, "IGNORE");
+						logColorArray.setType(searchPos, "IGNORE", true);
 					} else if (searchArr[searchPos].contains("VOTE")) {
-						logColorArray.setSType(searchPos, "IGNORE");
+						logColorArray.setType(searchPos, "IGNORE", true);
 					} else if (searchArr[searchPos].contains("GAME")) {
-						logColorArray.setSType(searchPos, "IGNORE");
+						logColorArray.setType(searchPos, "IGNORE", true);
 					} else {
-						logColorArray.setSType(searchPos, "BASIC");
+						logColorArray.setType(searchPos, "BASIC", true);
 					}
 					searchPos++;
 				}
@@ -179,33 +179,33 @@ public class logger {
 				if (temp2.toLowerCase().contains(search.toLowerCase()) || temp2.toLowerCase().contains(search2.toLowerCase())) {
 					searchArr[searchPos] = temp2;
 					if (searchArr[searchPos].contains("ADMIN")) {
-						logColorArray.setSType(searchPos, "ADMIN");
+						logColorArray.setType(searchPos, "ADMIN", true);
 					} else if (searchArr[searchPos].contains("OOC")) {
-						logColorArray.setSType(searchPos, "OOC");
+						logColorArray.setType(searchPos, "OOC", true);
 					} else if (searchArr[searchPos].contains("ATTACK")) {
-						logColorArray.setSType(searchPos, "ATTACK");
+						logColorArray.setType(searchPos, "ATTACK", true);
 					} else if (searchArr[searchPos].contains("ACCESS")) {
-						logColorArray.setSType(searchPos, "IGNORE");
+						logColorArray.setType(searchPos, "IGNORE", true);
 					} else if (searchArr[searchPos].contains("DEBUG")) {
-						logColorArray.setSType(searchPos, "IGNORE");
+						logColorArray.setType(searchPos, "IGNORE", true);
 					} else if (searchArr[searchPos].contains("SS")) {
-						logColorArray.setSType(searchPos, "IGNORE");
+						logColorArray.setType(searchPos, "IGNORE", true);
 					} else if (searchArr[searchPos].contains("GC")) {
-						logColorArray.setSType(searchPos, "IGNORE");
+						logColorArray.setType(searchPos, "IGNORE", true);
 					} else if (searchArr[searchPos].contains("mouse")) {
-						logColorArray.setSType(searchPos, "IGNORE");
+						logColorArray.setType(searchPos, "IGNORE", true);
 					} else if (searchArr[searchPos].contains("TGS")) {
-						logColorArray.setSType(searchPos, "IGNORE");
+						logColorArray.setType(searchPos, "IGNORE", true);
 					} else if (searchArr[searchPos].contains("TOPIC")) {
-						logColorArray.setSType(searchPos, "IGNORE");
+						logColorArray.setType(searchPos, "IGNORE", true);
 					} else if (searchArr[searchPos].contains("MASTER")) {
-						logColorArray.setSType(searchPos, "IGNORE");
+						logColorArray.setType(searchPos, "IGNORE", true);
 					} else if (searchArr[searchPos].contains("VOTE")) {
-						logColorArray.setSType(searchPos, "IGNORE");
+						logColorArray.setType(searchPos, "IGNORE", true);
 					} else if (searchArr[searchPos].contains("GAME")) {
-						logColorArray.setSType(searchPos, "IGNORE");
+						logColorArray.setType(searchPos, "IGNORE", true);
 					} else {
-						logColorArray.setSType(searchPos, "BASIC");
+						logColorArray.setType(searchPos, "BASIC", true);
 					}
 					searchPos++;
 				}
@@ -226,29 +226,25 @@ public class logger {
 		return finalString.toString();
 	}
 
-	public static int getFileSize() {
-		return fileSize;
+	public static int getFileSize(boolean search) {
+		if(search == true) {
+			return searchedSize;
+		}
+		else {
+			return fileSize;
+		}
 	}
 
-	public static int getSearchedSize() {
-		return searchedSize;
-	}
-
-	public static String getLogString(int arrNum) {
-		String adjustedLogArr[] = new String[fileSize];
-		adjustedLogArr[arrNum] = logArr[arrNum];
-		adjustedLogArr[arrNum] = adjustedLogArr[arrNum].replaceAll("&#34;", "''");
-		adjustedLogArr[arrNum] = adjustedLogArr[arrNum].replaceAll("&#39;", "'");
-		if (arrNum != 2) adjustedLogArr[arrNum] = adjustedLogArr[arrNum].replaceAll(logID + " ", "");
-		return adjustedLogArr[arrNum];
-	}
-
-	public static String getSearchedString(int arrNum) {
-		String adjustedLogArr[] = new String[searchedSize];
-		adjustedLogArr[arrNum] = searchArr[arrNum];
-		adjustedLogArr[arrNum] = adjustedLogArr[arrNum].replaceAll("&#34;", "''");
-		adjustedLogArr[arrNum] = adjustedLogArr[arrNum].replaceAll("&#39;", "'");
-		if (arrNum != 2) adjustedLogArr[arrNum] = adjustedLogArr[arrNum].replaceAll(logID + " ", "");
-		return adjustedLogArr[arrNum];
+	public static String getLogString(int arrNum, boolean searched) {
+		String returnString = new String();
+		if(searched == true) {
+			returnString = searchArr[arrNum];
+		} else {
+			returnString = logArr[arrNum];
+		}
+		returnString = returnString.replaceAll("&#34;", "''");
+		returnString = returnString.replaceAll("&#39;", "'");
+		if (arrNum != 2) returnString = returnString.replaceAll(logID + " ", "");
+		return returnString;
 	}
 }

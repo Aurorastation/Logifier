@@ -19,16 +19,8 @@ import javax.swing.text.Document;
 
 public final class LogScreen extends JPanel {
 
-	public LogScreen() {
-		initLogView();
-	}
-
-	public LogScreen(String search) {
-		initSearchedView(search);
-	}
-
-	public LogScreen(String search, String search2) {
-		initMultiSearchedView(search, search2);
+	public LogScreen(String[] searchWords) {
+		initLogView(searchWords);
 	}
 
 	ColorPane logScreen = new ColorPane();
@@ -36,25 +28,48 @@ public final class LogScreen extends JPanel {
 	int pos = 0;
 
 	//Method used to get everything ready, which is then called in the constructor
-	public void initLogView() {
+	public void initLogView(String[] searchWords) {
 		setBackground(Color.BLACK);
 		setLayout(new BorderLayout());
+
+		boolean isSearching = false;
+		if(searchWords != null && searchWords.length > 0) {
+			System.out.println("isSearching is true");
+			isSearching = true;
+		}
+
+		System.out.println("checking isSearching");
+		if(isSearching == true) {
+			Integer searchLength = 0;
+			for(int i = 0; i < searchWords.length; i++) {
+				if(searchWords[i] != null && searchWords[i].length() > 0) {
+					searchLength++;
+				}
+			}
+			if(searchLength == 1) {
+				System.out.println("searching for one word: " + searchWords[0]);
+				logger.populateSearch(searchWords[0]);
+			} else if(searchLength == 2) {
+				System.out.println("searching for two words: " + searchWords[0] + " and " + searchWords[1]);
+				logger.populateMultiSearch(searchWords[0], searchWords[1]);
+			}
+		}
 
 		JScrollPane scrollPanel = new JScrollPane();
 		add(scrollPanel).setPreferredSize(new Dimension(LogScreen.WIDTH, LogScreen.HEIGHT));
 		scrollPanel.setFocusable(false);
 
-		for (int i = 0; i < logger.getFileSize(); i++) {
-			if (logColorArray.getType(i).equalsIgnoreCase("BASIC")) {
-				logScreen.append(Color.decode("#A8D1A5"), logger.getLogString(i));
-			} else if (logColorArray.getType(i).equalsIgnoreCase("ADMIN")) {
-				logScreen.append(Color.decode("#B85B56"), logger.getLogString(i));
-			} else if (logColorArray.getType(i).equalsIgnoreCase("OOC")) {
-				logScreen.append(Color.decode("#5575A6"), logger.getLogString(i));
-			} else if (logColorArray.getType(i).equalsIgnoreCase("ATTACK")) {
-				logScreen.append(Color.decode("#BF569A"), logger.getLogString(i));
-			} else if (logColorArray.getType(i).equalsIgnoreCase("IGNORE")) {
-				logScreen.append(Color.gray, logger.getLogString(i));
+		for (int i = 0; i < logger.getFileSize(isSearching); i++) {
+			if (logColorArray.getType(i, isSearching).equalsIgnoreCase("BASIC")) {
+				logScreen.append(Color.decode("#A8D1A5"), logger.getLogString(i, isSearching));
+			} else if (logColorArray.getType(i, isSearching).equalsIgnoreCase("ADMIN")) {
+				logScreen.append(Color.decode("#B85B56"), logger.getLogString(i, isSearching));
+			} else if (logColorArray.getType(i, isSearching).equalsIgnoreCase("OOC")) {
+				logScreen.append(Color.decode("#5575A6"), logger.getLogString(i, isSearching));
+			} else if (logColorArray.getType(i, isSearching).equalsIgnoreCase("ATTACK")) {
+				logScreen.append(Color.decode("#BF569A"), logger.getLogString(i, isSearching));
+			} else if (logColorArray.getType(i, isSearching).equalsIgnoreCase("IGNORE")) {
+				logScreen.append(Color.gray, logger.getLogString(i, isSearching));
 			}
 		}
 		logScreen.setEditable(false);
@@ -67,110 +82,6 @@ public final class LogScreen extends JPanel {
 				"escapePressed");
 		getActionMap().put("escapePressed",
 				exit);
-
-		getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("SPACE") ,
-				"spacePressed");
-		getActionMap().put("spacePressed", setSearch);
-
-		getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("F") ,
-				"fPressed");
-		getActionMap().put("fPressed", searcher);
-
-		getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("D") ,
-				"dPressed"); // hehe depressed
-		getActionMap().put("dPressed", reverseSearcher);
-	}
-
-	public void initSearchedView(String search) {
-		if (search == null) {
-			setVisible(false);
-			main.main.ExitToMain();
-			return;
-		}
-		setLayout(new BorderLayout());
-
-		logger.populateSearch(search);
-		setBackground(Color.BLACK);
-		setPreferredSize(new Dimension(700, 600));
-
-		JScrollPane scrollPanel = new JScrollPane();
-		add(scrollPanel).setPreferredSize(new Dimension(700, 600));
-		scrollPanel.setFocusable(false);
-
-		for (int i = 0; i < logger.getSearchedSize(); i++) {
-			if (logColorArray.getSType(i).equalsIgnoreCase("BASIC")) {
-				logScreen.append(Color.decode("#A8D1A5"), logger.getSearchedString(i));
-			} else if (logColorArray.getSType(i).equalsIgnoreCase("ADMIN")) {
-				logScreen.append(Color.decode("#B85B56"), logger.getSearchedString(i));
-			} else if (logColorArray.getSType(i).equalsIgnoreCase("OOC")) {
-				logScreen.append(Color.decode("#5575A6"), logger.getSearchedString(i));
-			} else if (logColorArray.getSType(i).equalsIgnoreCase("ATTACK")) {
-				logScreen.append(Color.decode("#BF569A"), logger.getSearchedString(i));
-			} else if (logColorArray.getSType(i).equalsIgnoreCase("IGNORE")) {
-				logScreen.append(Color.gray, logger.getSearchedString(i));
-			}
-		}
-		logScreen.setEditable(false);
-		scrollPanel.setViewportView(logScreen);
-		scrollPanel.getViewport().getView().setBackground(Color.decode("#2B4037"));
-
-		setVisible(true);
-
-		getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ESCAPE"),
-				"escapePressed");
-		getActionMap().put("escapePressed", exit);
-
-		getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("SPACE") ,
-				"spacePressed");
-		getActionMap().put("spacePressed", setSearch);
-
-		getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("F") ,
-				"fPressed");
-		getActionMap().put("fPressed", searcher);
-
-		getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("D") ,
-				"dPressed"); // hehe depressed
-		getActionMap().put("dPressed", reverseSearcher);
-	}
-
-	public void initMultiSearchedView(String search, String search2) {
-		if (search == null || search2 == null) {
-			setVisible(false);
-			main.main.ExitToMain();
-			return;
-		}
-		setLayout(new BorderLayout());
-
-		logger.populateMultiSearch(search, search2);
-		setBackground(Color.BLACK);
-		setPreferredSize(new Dimension(700, 600));
-
-		JScrollPane scrollPanel = new JScrollPane();
-		add(scrollPanel).setPreferredSize(new Dimension(700, 600));
-		scrollPanel.setFocusable(false);
-
-		for (int i = 0; i < logger.getSearchedSize(); i++) {
-			if (logColorArray.getSType(i).equalsIgnoreCase("BASIC")) {
-				logScreen.append(Color.decode("#A8D1A5"), logger.getSearchedString(i));
-			} else if (logColorArray.getSType(i).equalsIgnoreCase("ADMIN")) {
-				logScreen.append(Color.decode("#B85B56"), logger.getSearchedString(i));
-			} else if (logColorArray.getSType(i).equalsIgnoreCase("OOC")) {
-				logScreen.append(Color.decode("#5575A6"), logger.getSearchedString(i));
-			} else if (logColorArray.getSType(i).equalsIgnoreCase("ATTACK")) {
-				logScreen.append(Color.decode("#BF569A"), logger.getSearchedString(i));
-			} else if (logColorArray.getSType(i).equalsIgnoreCase("IGNORE")) {
-				logScreen.append(Color.gray, logger.getSearchedString(i));
-			}
-		}
-		logScreen.setEditable(false);
-		scrollPanel.setViewportView(logScreen);
-		scrollPanel.getViewport().getView().setBackground(Color.decode("#2B4037"));
-
-		setVisible(true);
-
-		getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ESCAPE"),
-				"escapePressed");
-		getActionMap().put("escapePressed", exit);
 
 		getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("SPACE") ,
 				"spacePressed");
