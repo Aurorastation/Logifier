@@ -104,25 +104,25 @@ public class logger {
 				} else if (lineHolder.contains("ATTACK")) {
 					logColorArray.setColor(numToUse, "#BF569A", searching);
 				} else if (lineHolder.contains("ACCESS")) {
-					logColorArray.setColor(numToUse, "#223620", searching);
+					logColorArray.setColor(numToUse, "#506152", searching);
 				} else if (lineHolder.contains("DEBUG")) {
-					logColorArray.setColor(numToUse, "#223620", searching);
+					logColorArray.setColor(numToUse, "#506152", searching);
 				} else if (lineHolder.contains("SS")) {
-					logColorArray.setColor(numToUse, "#223620", searching);
+					logColorArray.setColor(numToUse, "#506152", searching);
 				} else if (lineHolder.contains("GC")) {
-					logColorArray.setColor(numToUse, "#223620", searching);
+					logColorArray.setColor(numToUse, "#506152", searching);
 				} else if (lineHolder.contains("Mouse")) {
-					logColorArray.setColor(numToUse, "#223620", searching);
+					logColorArray.setColor(numToUse, "#506152", searching);
 				} else if (lineHolder.contains("TGS")) {
-					logColorArray.setColor(numToUse, "#223620", searching);
+					logColorArray.setColor(numToUse, "#506152", searching);
 				} else if (lineHolder.contains("TOPIC")) {
-					logColorArray.setColor(numToUse, "#223620", searching);
+					logColorArray.setColor(numToUse, "#506152", searching);
 				} else if (lineHolder.contains("MASTER")) {
-					logColorArray.setColor(numToUse, "#223620", searching);
+					logColorArray.setColor(numToUse, "#506152", searching);
 				} else if (lineHolder.contains("VOTE")) {
-					logColorArray.setColor(numToUse, "#223620", searching);
+					logColorArray.setColor(numToUse, "#506152", searching);
 				} else if (lineHolder.contains("GAME")) {
-					logColorArray.setColor(numToUse, "#223620", searching);
+					logColorArray.setColor(numToUse, "#506152", searching);
 				} else {
 					logColorArray.setColor(numToUse, "#A8D1A5", searching);
 				}
@@ -135,7 +135,6 @@ public class logger {
 
 				Integer dateOpenIndex = logArr[0].indexOf("[");
 				date = logArr[0].substring(dateOpenIndex + 1, dateOpenIndex + 12);
-				System.out.println(date);
 			}
 		} catch (FileNotFoundException ex) {
 			JOptionPane.showMessageDialog(null, "The logifier text file not found! Make sure you named it correctly! Logs will be bugged!");
