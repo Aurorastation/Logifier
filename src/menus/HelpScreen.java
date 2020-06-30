@@ -18,14 +18,9 @@ public class HelpScreen extends JPanel {
 		initHelp();
 	}
 
-	//Method used to get everything ready, which is then called in the constructor
 	public void initHelp() {
-		setPreferredSize(new Dimension(700, 200));
-
-		//BorderLayout used here because the Help TextArea did not fit into my standard panelHolder set-up
 		setLayout(new BorderLayout());
 
-		//Sets up the Help TextArea menu. Hardcoded because no controls are customizable yet.
 		JTextArea helpTxt = new JTextArea(" Heya, this logifier was made by Geeves, initially created in 2018, converted to darkmode in 2020."
 				+ "\n"
 				+ "\n Controls:"
@@ -52,7 +47,6 @@ public class HelpScreen extends JPanel {
 		back.setBackground(Color.decode("#1F2E1D"));
 		back.setForeground(Color.decode("#A8D1A5"));
 		back.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
@@ -63,7 +57,6 @@ public class HelpScreen extends JPanel {
 
 		setVisible(true);
 
-		//Keybindings
 		getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ESCAPE"),
 				"escapePressed");
 		getActionMap().put("escapePressed",
