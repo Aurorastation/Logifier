@@ -38,17 +38,7 @@ public final class LogScreen extends JPanel {
 		}
 
 		if(isSearching == true) {
-			Integer searchLength = 0;
-			for(int i = 0; i < searchWords.length; i++) {
-				if(searchWords[i] != null && searchWords[i].length() > 0) {
-					searchLength++;
-				}
-			}
-			if(searchLength == 1) {
-				logger.populateSearch(searchWords[0]);
-			} else if(searchLength == 2) {
-				logger.populateMultiSearch(searchWords[0], searchWords[1]);
-			}
+			logger.populateLog(searchWords);
 		}
 
 		JScrollPane scrollPanel = new JScrollPane();

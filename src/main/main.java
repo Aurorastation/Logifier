@@ -22,7 +22,7 @@ public class main {
 	//This sets up the JFrame we will be placing every component of the program on.
 	//It also adds the "MasterMenu" onto the base JFrame.
 	private static void Initialize() {
-		logger.populateLog();
+		logger.populateLog(null);
 		base = new JFrame();
 		base.setPreferredSize(new Dimension(700, 650));
 		base.setTitle("Geeves: Logifier at Night!");

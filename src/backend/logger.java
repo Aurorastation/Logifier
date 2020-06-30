@@ -14,7 +14,7 @@ public class logger {
 	private static File logFile = new File(".");
 	private static String logID;
 
-	public static void populateLog() {
+	public static void populateLog(String[] searchWords) {
 		Scanner fileScan;
 		try {
 			File curDir = new File(".");
@@ -30,200 +30,105 @@ public class logger {
 
 			fileScan = new Scanner(logFile);
 
-			while (fileScan.hasNextLine()) {
-				fileSize++;
-				fileScan.nextLine();
+			boolean searching = false;
+			if(searchWords != null && searchWords.length > 0) {
+				searching = true;
+				searchedSize = 0;
+			}
+			else {
+				fileSize = 0;
+			}
+
+			String lineHolder;
+			while(fileScan.hasNextLine()) {
+				lineHolder = fileScan.nextLine();
+				if(searching == true) {
+					for(int i = 0; i < searchWords.length; i++) {
+						if(searchWords[i].length() > 0 && lineHolder.toLowerCase().contains(searchWords[i].toLowerCase())) {
+							searchedSize++;
+							break;
+						}
+					}
+				}
+				else {
+					fileSize++;
+				}
 			}
 			fileScan.close();
 
-			logArr = new String[fileSize];
+			if(searching == true) {
+				logColorArray.initSearchArr(searchedSize);
+				searchArr = new String[searchedSize];
+			}
+			else {
+				logArr = new String[fileSize];
+			}
 
 			fileScan = new Scanner(logFile);
 
-			for (int i = 0; i < fileSize; i++) {
-				logArr[i] = fileScan.nextLine() + "\n";
-				if (logArr[i].contains("ADMIN")) {
-					logColorArray.setColor(i, "#B85B56", false);
-				} else if (logArr[i].contains("OOC")) {
-					logColorArray.setColor(i, "#5575A6", false);
-				} else if (logArr[i].contains("ATTACK")) {
-					logColorArray.setColor(i, "#BF569A", false);
-				} else if (logArr[i].contains("ACCESS")) {
-					logColorArray.setColor(i, "#223620", false);
-				} else if (logArr[i].contains("DEBUG")) {
-					logColorArray.setColor(i, "#223620", false);
-				} else if (logArr[i].contains("SS")) {
-					logColorArray.setColor(i, "#223620", false);
-				} else if (logArr[i].contains("GC")) {
-					logColorArray.setColor(i, "#223620", false);
-				} else if (logArr[i].contains("Mouse")) {
-					logColorArray.setColor(i, "#223620", false);
-				} else if (logArr[i].contains("TGS")) {
-					logColorArray.setColor(i, "#223620", false);
-				} else if (logArr[i].contains("TOPIC")) {
-					logColorArray.setColor(i, "#223620", false);
-				} else if (logArr[i].contains("MASTER")) {
-					logColorArray.setColor(i, "#223620", false);
-				} else if (logArr[i].contains("VOTE")) {
-					logColorArray.setColor(i, "#223620", false);
-				} else if (logArr[i].contains("GAME")) {
-					logColorArray.setColor(i, "#223620", false);
+			boolean hasWord = false;
+			int searchArrCount = 0;
+			int numToUse = 0;
+			for(int i = 0; i < logger.getFileSize(false); i++) {
+				lineHolder = fileScan.nextLine() + "\n";
+				if(searching == true) {
+					hasWord = false;
+					for(int j = 0; j < searchWords.length; j++) {
+						if(searchWords[j].length() > 0 && lineHolder.toLowerCase().contains(searchWords[j].toLowerCase())) {
+							hasWord = true;
+							searchArr[searchArrCount] = lineHolder;
+							break;
+						}
+					}
+					if(hasWord == false) {
+						continue;
+					}
+					numToUse = searchArrCount;
+					searchArrCount++;
+				}
+				else {
+					logArr[i] = lineHolder;
+					numToUse = i;
+				}
+				if (lineHolder.contains("ADMIN")) {
+					logColorArray.setColor(numToUse, "#B85B56", searching);
+				} else if (lineHolder.contains("OOC")) {
+					logColorArray.setColor(numToUse, "#5575A6", searching);
+				} else if (lineHolder.contains("ATTACK")) {
+					logColorArray.setColor(numToUse, "#BF569A", searching);
+				} else if (lineHolder.contains("ACCESS")) {
+					logColorArray.setColor(numToUse, "#223620", searching);
+				} else if (lineHolder.contains("DEBUG")) {
+					logColorArray.setColor(numToUse, "#223620", searching);
+				} else if (lineHolder.contains("SS")) {
+					logColorArray.setColor(numToUse, "#223620", searching);
+				} else if (lineHolder.contains("GC")) {
+					logColorArray.setColor(numToUse, "#223620", searching);
+				} else if (lineHolder.contains("Mouse")) {
+					logColorArray.setColor(numToUse, "#223620", searching);
+				} else if (lineHolder.contains("TGS")) {
+					logColorArray.setColor(numToUse, "#223620", searching);
+				} else if (lineHolder.contains("TOPIC")) {
+					logColorArray.setColor(numToUse, "#223620", searching);
+				} else if (lineHolder.contains("MASTER")) {
+					logColorArray.setColor(numToUse, "#223620", searching);
+				} else if (lineHolder.contains("VOTE")) {
+					logColorArray.setColor(numToUse, "#223620", searching);
+				} else if (lineHolder.contains("GAME")) {
+					logColorArray.setColor(numToUse, "#223620", searching);
 				} else {
-					logColorArray.setColor(i, "#A8D1A5", false);
+					logColorArray.setColor(numToUse, "#A8D1A5", searching);
 				}
 			}
-			Integer IDIndex = logArr[2].indexOf("ID: ");
-			IDIndex = IDIndex + 4;
-			Integer bracketIndex = logArr[2].indexOf(")");
-			logID = logArr[2].substring(IDIndex, bracketIndex);
+			if(searching == false) {
+				Integer IDIndex = logArr[2].indexOf("ID: ");
+				IDIndex = IDIndex + 4;
+				Integer bracketIndex = logArr[2].indexOf(")");
+				logID = logArr[2].substring(IDIndex, bracketIndex);
+			}
 		} catch (FileNotFoundException ex) {
 			JOptionPane.showMessageDialog(null, "The logifier text file not found! Make sure you named it correctly! Logs will be bugged!");
 		}
-
-	}
-
-	public static void populateSearch(String search) {
-		Scanner fileScan;
-		try {
-			String temp = "";
-			fileScan = new Scanner(logFile);
-
-			searchedSize = 0;
-
-			while (fileScan.hasNextLine()) {
-				temp = fileScan.nextLine();
-				if (temp.toLowerCase().contains(search.toLowerCase())) {
-					searchedSize++;
-				}
-			}
-			fileScan.close();
-
-			searchArr = new String[searchedSize];
-			logColorArray.initSearchArr(searchedSize);
-
-			fileScan = new Scanner(logFile);
-			String temp2 = "";
-			int searchPos = 0;
-
-			for (int i = 0; i < fileSize; i++) {
-				temp2 = fileScan.nextLine() + "\n";
-
-				if (temp2.toLowerCase().contains(search.toLowerCase())) {
-					searchArr[searchPos] = temp2;
-					if (searchArr[searchPos].contains("ADMIN")) {
-						logColorArray.setColor(searchPos, "#B85B56", true);
-					} else if (searchArr[searchPos].contains("OOC")) {
-						logColorArray.setColor(searchPos, "#5575A6", true);
-					} else if (searchArr[searchPos].contains("ATTACK")) {
-						logColorArray.setColor(searchPos, "#BF569A", true);
-					} else if (searchArr[searchPos].contains("ACCESS")) {
-						logColorArray.setColor(searchPos, "#223620", true);
-					} else if (searchArr[searchPos].contains("DEBUG")) {
-						logColorArray.setColor(searchPos, "#223620", true);
-					} else if (searchArr[searchPos].contains("SS")) {
-						logColorArray.setColor(searchPos, "#223620", true);
-					} else if (searchArr[searchPos].contains("GC")) {
-						logColorArray.setColor(searchPos, "#223620", true);
-					} else if (searchArr[searchPos].contains("mouse")) {
-						logColorArray.setColor(searchPos, "#223620", true);
-					} else if (searchArr[searchPos].contains("TGS")) {
-						logColorArray.setColor(searchPos, "#223620", true);
-					} else if (searchArr[searchPos].contains("TOPIC")) {
-						logColorArray.setColor(searchPos, "#223620", true);
-					} else if (searchArr[searchPos].contains("MASTER")) {
-						logColorArray.setColor(searchPos, "#223620", true);
-					} else if (searchArr[searchPos].contains("VOTE")) {
-						logColorArray.setColor(searchPos, "#223620", true);
-					} else if (searchArr[searchPos].contains("GAME")) {
-						logColorArray.setColor(searchPos, "#223620", true);
-					} else {
-						logColorArray.setColor(searchPos, "#A8D1A5", true);
-					}
-					searchPos++;
-				}
-
-			}
-
-		} catch (FileNotFoundException ex) {
-			JOptionPane.showMessageDialog(null, "The logifier text file not found! Make sure you named it correctly! Logs will be bugged!");
-		}
-
-	}
-
-	public static void populateMultiSearch(String search, String search2){
-		Scanner fileScan;
-		try {
-			String temp = "";
-			fileScan = new Scanner(logFile);
-
-			searchedSize = 0;
-
-			while (fileScan.hasNextLine()) {
-				temp = fileScan.nextLine();
-				if (temp.toLowerCase().contains(search.toLowerCase()) || temp.toLowerCase().contains(search2.toLowerCase())) {
-					searchedSize++;
-				}
-			}
-			fileScan.close();
-
-			searchArr = new String[searchedSize];
-			logColorArray.initSearchArr(searchedSize);
-
-			fileScan = new Scanner(logFile);
-			String temp2 = "";
-			int searchPos = 0;
-
-			for (int i = 0; i < fileSize; i++) {
-				temp2 = fileScan.nextLine() + "\n";
-
-				if (temp2.toLowerCase().contains(search.toLowerCase()) || temp2.toLowerCase().contains(search2.toLowerCase())) {
-					searchArr[searchPos] = temp2;
-					if (searchArr[searchPos].contains("ADMIN")) {
-						logColorArray.setColor(searchPos, "#B85B56", true);
-					} else if (searchArr[searchPos].contains("OOC")) {
-						logColorArray.setColor(searchPos, "#5575A6", true);
-					} else if (searchArr[searchPos].contains("ATTACK")) {
-						logColorArray.setColor(searchPos, "#BF569A", true);
-					} else if (searchArr[searchPos].contains("ACCESS")) {
-						logColorArray.setColor(searchPos, "#223620", true);
-					} else if (searchArr[searchPos].contains("DEBUG")) {
-						logColorArray.setColor(searchPos, "#223620", true);
-					} else if (searchArr[searchPos].contains("SS")) {
-						logColorArray.setColor(searchPos, "#223620", true);
-					} else if (searchArr[searchPos].contains("GC")) {
-						logColorArray.setColor(searchPos, "#223620", true);
-					} else if (searchArr[searchPos].contains("mouse")) {
-						logColorArray.setColor(searchPos, "#223620", true);
-					} else if (searchArr[searchPos].contains("TGS")) {
-						logColorArray.setColor(searchPos, "#223620", true);
-					} else if (searchArr[searchPos].contains("TOPIC")) {
-						logColorArray.setColor(searchPos, "#223620", true);
-					} else if (searchArr[searchPos].contains("MASTER")) {
-						logColorArray.setColor(searchPos, "#223620", true);
-					} else if (searchArr[searchPos].contains("VOTE")) {
-						logColorArray.setColor(searchPos, "#223620", true);
-					} else if (searchArr[searchPos].contains("GAME")) {
-						logColorArray.setColor(searchPos, "#223620", true);
-					} else {
-						logColorArray.setColor(searchPos, "#A8D1A5", true);
-					}
-					searchPos++;
-				}
-
-			}
-
-		} catch (FileNotFoundException ex) {
-			JOptionPane.showMessageDialog(null, "The logifier text file not found! Make sure you named it correctly! Logs will be bugged!");
-		}
-
-	}
-
-	public static String logString() {
-		StringBuilder finalString = new StringBuilder("");
-		for (int i = 0; i < logArr.length; i++) {
-			finalString.append(logArr[i]).append("\n");
-		}
-		return finalString.toString();
 	}
 
 	public static int getFileSize(boolean search) {
@@ -236,13 +141,13 @@ public class logger {
 	}
 
 	public static String getLogString(int arrNum, boolean searched) {
-		String returnString = new String();
+		String returnString = "";
 		if(searched == true) {
 			returnString = searchArr[arrNum];
 		} else {
 			returnString = logArr[arrNum];
 		}
-		returnString = returnString.replaceAll("&#34;", "''");
+		returnString = returnString.replaceAll("&#34;", "\"");
 		returnString = returnString.replaceAll("&#39;", "'");
 		if (arrNum != 2) returnString = returnString.replaceAll(logID + " ", "");
 		return returnString;
