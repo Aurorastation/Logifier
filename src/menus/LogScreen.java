@@ -27,6 +27,8 @@ public final class LogScreen extends JPanel {
 	String find = "";
 	int pos = 0;
 
+	boolean hasGoneForwards = false;
+
 	//Method used to get everything ready, which is then called in the constructor
 	public void initLogView(String[] searchWords) {
 		setBackground(Color.BLACK);
@@ -100,6 +102,10 @@ public final class LogScreen extends JPanel {
 					if (pos + findLength > document.getLength()) {
 						pos = 0;
 					}
+					else if(hasGoneForwards == false) {
+						pos += findLength;
+						hasGoneForwards = true;
+					}
 					while (pos + findLength <= document.getLength()) {
 						String match = document.getText(pos, findLength).toLowerCase();
 						if (match.equals(find)) {
@@ -134,6 +140,10 @@ public final class LogScreen extends JPanel {
 					boolean found = false;
 					if (pos == 0 || pos + findLength > document.getLength()) {
 						pos = document.getLength() - findLength;
+					}
+					else if(hasGoneForwards == true) {
+						pos -= findLength + 1;
+						hasGoneForwards = false;
 					}
 					while (pos > 0) {
 						String match = document.getText(pos, findLength).toLowerCase();
