@@ -3,6 +3,7 @@ package main;
 import backend.logger;
 
 import java.awt.Dimension;
+import java.io.File;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -13,11 +14,13 @@ import menus.MasterMenu;
 public class main {
 
 	private static JFrame base;
-	private static MasterMenu menu;
+	public static MasterMenu menu;
 
 	public static void main(String[] args) {
 		Initialize();
 	}
+
+	public static File logFile;
 
 	//This sets up the JFrame we will be placing every component of the program on.
 	//It also adds the "MasterMenu" onto the base JFrame.
