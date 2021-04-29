@@ -165,6 +165,8 @@ public class logger {
         if (arrNum != 2) {
             returnString = returnString.replaceAll(logID + " ", "");
         }
+        returnString = returnString.replaceAll("(?i)\\(?(<a(?: href.*?>)|(?:JMP)?<\\/a>)\\)?", "");
+        returnString = returnString.replaceAll("(?i) ?\\(?(<(?:\\/)?font.*?> ?)\\)?", "");
         return returnString;
     }
 }
